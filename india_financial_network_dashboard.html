@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>India Financial Services Network — Competitive Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0a0c0f;--paper:#f5f3ee;--surface:#ffffff;--surf2:#f0ede6;
+  --bd:#d8d4cc;--bd2:#c4bfb5;
+  --t1:#0a0c0f;--t2:#4a4640;--t3:#9a948a;
+  --acc:#1a3a8f;--acc2:#e8420a;--green:#0a6640;
+  --mono:'DM Mono',monospace;--head:'Syne',sans-serif;
+  --sans:'DM Mono',monospace;
+}
+body{background:var(--paper);color:var(--t1);font-family:var(--mono);font-size:12px;min-height:100vh;overflow:hidden}
+.shell{display:grid;grid-template-columns:280px 1fr;grid-template-rows:56px 1fr;height:100vh}
+
+/* TOPBAR */
+.topbar{grid-column:1/-1;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:space-between;padding:0 24px;gap:16px;z-index:10}
+.topbar-title{font-family:var(--head);font-size:15px;font-weight:600;letter-spacing:.02em;color:var(--paper)}
+.topbar-title span{color:#9ab0ff;font-weight:400}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.api-wrap{display:flex;align-items:center;gap:8px}
+.api-label{font-size:10px;color:#6a7090;white-space:nowrap}
+.api-input{background:#1a1e2a;border:1px solid #2a3040;border-radius:4px;padding:5px 10px;color:#9ab0ff;font-family:var(--mono);font-size:10px;width:240px;outline:none}
+.api-input::placeholder{color:#3a4060}
+.api-input.ok{border-color:#2a6040;color:#5ad0a0}
+.api-dot{width:6px;height:6px;border-radius:50%;background:#3a4060;flex-shrink:0;transition:background .2s}
+.api-dot.ok{background:#5ad0a0}
+
+/* SIDEBAR */
+.sidebar{background:var(--surface);border-right:1px solid var(--bd);overflow-y:auto;padding:0}
+.sb-section{padding:14px 16px;border-bottom:1px solid var(--bd)}
+.sb-hdr{font-family:var(--head);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.mode-hint{font-size:10px;color:var(--t3);line-height:1.7;margin-bottom:10px}
+.mode-hint .b{color:var(--acc);font-weight:500}
+.mode-hint .g{color:var(--green);font-weight:500}
+
+/* PRESETS */
+.presets{display:flex;flex-wrap:wrap;gap:4px}
+.pb{font-size:9px;padding:3px 8px;border-radius:3px;border:1px solid var(--bd2);background:transparent;color:var(--t2);cursor:pointer;font-family:var(--mono);transition:all .1s}
+.pb:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.pb.red{color:var(--acc2);border-color:var(--bd)}
+.pb.red:hover{background:var(--acc2);border-color:var(--acc2);color:#fff}
+
+/* LENDER TOGGLES */
+.cat-label{font-size:9px;font-family:var(--head);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin:10px 0 4px;padding:0 2px}
+.lt{display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:4px;cursor:pointer;border:1px solid transparent;transition:all .08s;user-select:none}
+.lt:hover{background:var(--surf2)}
+.lt.ib{border-color:var(--lc);background:color-mix(in srgb,var(--lc) 8%,transparent)}
+.lt.ic{border-color:color-mix(in srgb,var(--lc) 35%,transparent);background:color-mix(in srgb,var(--lc) 4%,transparent)}
+.ri{font-size:8px;font-family:var(--head);font-weight:700;padding:1px 4px;border-radius:2px;min-width:28px;text-align:center;flex-shrink:0;letter-spacing:.05em}
+.rb{background:color-mix(in srgb,var(--lc) 15%,transparent);color:var(--lc)}
+.rc{background:color-mix(in srgb,var(--lc) 8%,transparent);color:color-mix(in srgb,var(--lc) 60%,var(--t3))}
+.ro{background:transparent;color:transparent}
+.lname{font-size:11px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.lt.ib .lname,.lt.ic .lname{color:var(--t1)}
+.lbr{font-size:9px;color:var(--t3);flex-shrink:0;font-family:var(--mono)}
+.lsrc{font-size:8px;color:var(--t3);flex-shrink:0}
+.lsrc.V{color:#0a6640}
+.lsrc.E{color:#8a5a00}
+
+/* STATE GRID */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.stb{font-size:9px;padding:4px 2px;border-radius:3px;border:1px solid var(--bd);background:transparent;color:var(--t3);cursor:pointer;font-family:var(--mono);text-align:center;transition:all .08s}
+.stb:hover{border-color:var(--acc);color:var(--t1)}
+.stb.act{background:var(--ink);border-color:var(--ink);color:var(--paper);font-weight:500}
+.stb.hd{color:var(--t2);border-color:var(--bd2)}
+
+/* MAIN */
+.main{overflow-y:auto;background:var(--paper);display:flex;flex-direction:column}
+.vtabs{display:flex;background:var(--surface);border-bottom:1px solid var(--bd);padding:0 20px;gap:0;flex-shrink:0}
+.vt{font-size:10px;font-family:var(--head);font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;cursor:pointer;color:var(--t3);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .1s}
+.vt:hover{color:var(--t1)}
+.vt.act{color:var(--acc);border-bottom-color:var(--acc)}
+.ct{padding:20px;flex:1}
+
+/* STATS ROW */
+.sr{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.sc{background:var(--surface);border:1px solid var(--bd);border-radius:6px;padding:12px 14px}
+.sc.base-card{border-color:var(--lc,var(--bd));border-width:2px}
+.sv{font-size:22px;font-family:var(--head);font-weight:600;line-height:1}
+.slb{font-size:9px;color:var(--t3);margin-top:4px;text-transform:uppercase;letter-spacing:.08em}
+
+/* TABLES */
+.tw{background:var(--surface);border:1px solid var(--bd);border-radius:6px;overflow:hidden;margin-bottom:14px}
+.th{padding:10px 16px;background:var(--surf2);border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.tt{font-family:var(--head);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)}
+.ts{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:11px}
+th{font-size:9px;font-family:var(--head);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);padding:7px 12px;background:var(--surf2);border-bottom:1px solid var(--bd);text-align:left;white-space:nowrap}
+td{padding:6px 12px;border-bottom:1px solid color-mix(in srgb,var(--bd) 50%,transparent);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--surf2)}
+.pill{font-size:9px;padding:2px 6px;border-radius:3px;font-family:var(--mono);white-space:nowrap;display:inline-block;margin:1px}
+.hn{font-size:10px;font-family:var(--head);font-weight:600;padding:1px 6px;border-radius:3px;display:inline-block}
+.h0{background:#f0ede6;color:#9a948a}
+.h1{background:#e6eeff;color:#1a3a8f}
+.h2{background:#c8d8ff;color:#0a2060}
+.h3{background:#fff0e0;color:#7a4000}
+.h4{background:#ffe0d0;color:#8a2010}
+.h5{background:#ffd0c0;color:#c01000}
+
+/* AI PANEL */
+.aw{background:var(--surface);border:1px solid var(--bd);border-radius:6px;overflow:hidden;margin-bottom:14px}
+.at{padding:10px 16px;background:var(--surf2);border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.adot{width:7px;height:7px;border-radius:50%;background:var(--bd2);margin-right:8px;flex-shrink:0;transition:background .2s}
+.adot.go{background:#5ad0a0}
+.adot.spin{background:#f0a020;animation:pu 1s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.2}}
+.atl{font-family:var(--head);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--t2)}
+.ab{padding:16px;font-size:12px;line-height:1.75;color:var(--t2);min-height:90px}
+.ab p{margin-bottom:.7em}
+.ab p:last-child{margin-bottom:0}
+.ab strong{color:var(--t1);font-weight:500}
+.ab .hint{color:var(--t3);font-style:italic}
+.cur::after{content:'▋';animation:bl .7s step-end infinite;color:var(--acc)}
+@keyframes bl{50%{opacity:0}}
+
+/* BRANCH CHART */
+.bar-chart{padding:16px}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.bar-label{font-size:10px;width:150px;text-align:right;flex-shrink:0;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;height:20px;background:var(--surf2);border-radius:3px;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:3px;transition:width .4s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;justify-content:flex-end;padding-right:6px;min-width:30px}
+.bar-val{font-size:9px;font-family:var(--head);font-weight:600;color:#fff;white-space:nowrap;mix-blend-mode:difference}
+.bar-src{font-size:9px;color:var(--t3);width:30px;text-align:left;flex-shrink:0}
+.bar-src.V{color:#0a6640}
+.bar-src.E{color:#8a5a00}
+
+/* TODO */
+.todo-wrap{background:var(--surface);border:1px solid var(--bd);border-radius:6px;overflow:hidden}
+.todo-top{padding:10px 16px;background:var(--surf2);display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.todo-top:hover{background:#e8e4dc}
+.todo-body{padding:4px 16px 12px;border-top:1px solid var(--bd)}
+.ti{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid color-mix(in srgb,var(--bd) 40%,transparent)}
+.ti:last-child{border-bottom:none}
+.tic{cursor:pointer;font-size:14px;line-height:1.3;flex-shrink:0;color:var(--t3);transition:color .1s}
+.tic:hover{color:var(--t1)}
+.ti.dn .tic{color:var(--green)}
+.ti.dn .titx{text-decoration:line-through;color:var(--t3)}
+.pr{font-size:8px;font-family:var(--head);font-weight:700;padding:2px 5px;border-radius:2px;flex-shrink:0;margin-top:2px;letter-spacing:.05em}
+.prh{background:#ffe8e0;color:#c01000}
+.prm{background:#fff4e0;color:#8a5000}
+.prl{background:var(--surf2);color:var(--t3)}
+.titx{font-size:11px;color:var(--t2);line-height:1.55}
+
+/* EMPTY */
+.em{padding:60px 40px;text-align:center;color:var(--t3);font-size:11px;line-height:2}
+.em .big{font-family:var(--head);font-size:28px;font-weight:700;color:var(--bd2);margin-bottom:12px;letter-spacing:-.02em}
+
+/* HELP TAB */
+.help-wrap{max-width:820px;padding-bottom:40px}
+.help-section{margin-bottom:28px}
+.help-h1{font-family:var(--head);font-size:22px;font-weight:600;letter-spacing:-.02em;margin-bottom:6px;color:var(--t1)}
+.help-h2{font-family:var(--head);font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid var(--bd)}
+.help-p{font-size:13px;line-height:1.75;color:var(--t2);margin-bottom:10px}
+.help-p b{color:var(--t1);font-weight:500}
+.help-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.hcard{background:var(--surface);border:1px solid var(--bd);border-radius:6px;padding:14px 16px}
+.hcard-t{font-family:var(--head);font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;color:var(--t1)}
+.hcard p{font-size:12px;line-height:1.65;color:var(--t2);margin-bottom:5px}
+.hcard p:last-child{margin-bottom:0}
+.src-tbl{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px}
+.src-tbl th{font-size:9px;font-family:var(--head);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);padding:7px 10px;background:var(--surf2);border:1px solid var(--bd);text-align:left;white-space:nowrap}
+.src-tbl td{padding:6px 10px;border:1px solid var(--bd);vertical-align:top;line-height:1.6;font-size:12px;color:var(--t2)}
+.src-tbl tr:hover td{background:var(--surf2)}
+.bv{display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;background:#d4edda;color:#0a6640;font-family:var(--head);font-weight:700}
+.be{display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;background:#fff3cd;color:#7a4000;font-family:var(--head);font-weight:700}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-title">India Financial Services <span>/ Network Intelligence</span></div>
+  <div class="topbar-right">
+    <div class="api-wrap">
+      <span class="api-label">Anthropic API key →</span>
+      <div class="api-dot" id="adot"></div>
+      <input class="api-input" id="api-key" type="password" placeholder="sk-ant-... (enables Claude analysis)">
+    </div>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-section">
+    <div class="sb-hdr">Selection</div>
+    <div class="mode-hint">Click once → <span class="b">BASE</span><br>Click again → <span class="g">COMP</span><br>Click again → off</div>
+    <div class="presets" id="PR"></div>
+  </div>
+  <div class="sb-section">
+    <div class="sb-hdr">Lenders <span style="font-size:9px;font-weight:400;color:var(--t3)">V = verified · E = estimated</span></div>
+    <div id="LL"></div>
+  </div>
+  <div class="sb-section">
+    <div class="sb-hdr">State</div>
+    <div class="sg" id="SG"></div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="vtabs">
+    <div class="vt act" onclick="setView('towns',this)">Town presence</div>
+    <div class="vt" onclick="setView('coverage',this)">State matrix</div>
+    <div class="vt" onclick="setView('branches',this)">Branch count chart</div>
+    <div class="vt" onclick="setView('help',this)">Sources &amp; how to use</div>
+  </div>
+  <div class="ct" id="CT"></div>
+</main>
+
+</div>
+<script>
+/* ═══════════════════════════════════════════════
+   DATA — all branch counts verified FY25 unless noted
+   Source key: V=verified primary source, E=estimated/corroborated
+   ═══════════════════════════════════════════════ */
+const L=[
+  // HFC — South-focused
+  {id:'aptus',     n:'Aptus Value HF',       cat:'hfc_s',c:'#1a3a8f',br:300, src:'V',srcNote:'CARE ratings May 2025, Mar-25',aum:'₹10,865cr',st:['TN','AP','TS','KA','OD','MH','PY']},
+  {id:'repco',     n:'Repco Home Finance',   cat:'hfc_s',c:'#0e5c3a',br:189, src:'V',srcNote:'FY25 results Mar-25: 189 branches + 44 satellite = 233 total',aum:'₹14,602cr',st:['TN','AP','TS','KA','KE','MH','RJ','WB','JH','OD','GJ','MP','PY']},
+  {id:'homefirst', n:'Home First FC',        cat:'hfc_s',c:'#1a7a50',br:155, src:'V',srcNote:'Q4FY25 investor pres, Mar-25',aum:'₹12,295cr',st:['TN','AP','TS','KA','GJ','MH','UP','MP','RJ','HR']},
+  {id:'truhome',   n:'Truhome Finance',      cat:'hfc_s',c:'#2aaa70',br:170, src:'V',srcNote:'Company website (170+), 16 states',aum:'₹15,236cr',st:['TN','AP','TS','KA','GJ','MH','RJ','MP','HR','UK','PB','KE','CG','WB']},
+  {id:'sundaram',  n:'Sundaram Home Finance', cat:'hfc_s',c:'#4ac080',br:115, src:'V',srcNote:'Company website sundaramhome.in',aum:'₹16,262cr',st:['TN','AP','TS','KA','KE','MH','PY','RJ','CG']},
+  {id:'sundarameb',n:'Sundaram EB division', cat:'hfc_s',c:'#85B7EB',br:72,  src:'V',srcNote:'Company website sundaramhome.in: 72 EB branches TN/TS/AP/KA',aum:'sub-div',  st:['TN','KA','AP','KE','TS']},
+  {id:'canfin',    n:'CanFin Homes',         cat:'hfc_s',c:'#2050b0',br:234, src:'V',srcNote:'FY25 results, opened 15 in FY25',aum:'₹35,000cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','PY','AS']},
+  // HFC — North/West
+  {id:'aavas',     n:'Aavas Financiers',     cat:'hfc_n',c:'#7F77DD',br:397, src:'V',srcNote:'FY25 results, Mar-25; 14 states',aum:'₹20,420cr',st:['RJ','GJ','MH','MP','DL','UP','CG','HR','UK','HP','OD','KA','PB','TN']},
+  {id:'indiashelter',n:'India Shelter FC',  cat:'hfc_n',c:'#a090f0',br:266, src:'V',srcNote:'CARE/Q4FY25 results, Mar-25',aum:'₹8,189cr', st:['RJ','MH','MP','KA','GJ','UP','HR','CG','UK','PB','JH','WB','BR','AS','TS','TN']},
+  // HFC — Pan-India
+  {id:'aadhar',    n:'Aadhar Housing Fin',   cat:'hfc_p',c:'#c03060',br:575, src:'V',srcNote:'ICICI Sec May-25; 57 added FY25',aum:'₹25,500cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','MN']},
+  {id:'pnbhf',     n:'PNB Housing Fin',      cat:'hfc_p',c:'#e03020',br:356, src:'V',srcNote:'Q4FY25 results Apr-25: 356 branches/outreach; 200 Roshni affordable',aum:'₹74,724cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','KE']},
+  {id:'abhfl',     n:'Aditya Birla HF',      cat:'hfc_p',c:'#e05030',br:168, src:'V',srcNote:'Company website Dec-25: 168 branches; AUM ₹42,204cr Dec-25',aum:'₹42,204cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','BR','AS','KE']},
+  {id:'ltf',       n:'L&T Finance',          cat:'nbfc_div',c:'#d07040',br:850, src:'E',srcNote:'850+ = total company all products (HL+LAP has no standalone branch count); retail AUM ₹95,180cr FY25',aum:'₹97,762cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','BR','AS','KE']},
+  {id:'iifl',      n:'IIFL Home Finance',    cat:'hfc_p',c:'#c08030',br:315, src:'V',srcNote:'Company website: 315 branches, 18 states (current)',aum:'₹27,000cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS']},
+  {id:'bajajhf',   n:'Bajaj Housing Finance', cat:'hfc_p',c:'#a02020',br:216, src:'V',srcNote:'Q4FY25 results Apr-25; 174 locations, 21 states',aum:'₹1,14,684cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','KE']},
+  {id:'gichf',     n:'GIC Housing Finance',   cat:'hfc_p',c:'#606060',br:72,  src:'V',srcNote:'IIFL Capital Mar-25: 72 branch offices + 5 satellite + 4 hub',aum:'₹10,774cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','BR','GA','JK']},
+  {id:'sammaan',   n:'Sammaan Capital (IBHFL)',cat:'hfc_p',c:'#505070',br:220, src:'V',srcNote:'Company website Jun-25 (220+ branches); formerly Indiabulls HF',aum:'₹70,000cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','KE']},
+  // NBFC — property/business
+  {id:'fivestar',  n:'Five Star BF',         cat:'nbfc',  c:'#0a7040',br:748, src:'V',srcNote:'CARE Jun-25: AP=234,TN=206,TS=115,MP=94,KA=59,MH=25,UP=6,RJ=5,CG=3,GJ=1',aum:'₹11,877cr',st:['TN','AP','TS','KA','MP','MH','CG','UP','RJ','GJ']},
+  {id:'sbfc',      n:'SBFC Finance',         cat:'nbfc',  c:'#2a9060',br:205, src:'V',srcNote:'Broker report Jun-25: 205 branches Mar-25; 220 by Jan-26 (CARE)',aum:'₹9,351cr', st:['DL','HR','RJ','UP','MH','GJ','KA','TN','MP','PB','UK','BR','WB','TS','AS','JH']},
+  // Cholamandalam — segment splits (FY25 investor presentation Mar-25)
+  // VF=1564 total; LAP=780 (771 co-located with VF); HL=710 (677 co-located with VF); Total=1613
+  {id:'chola_total',n:'Chola — Total',       cat:'chola', c:'#2244a0',br:1613,src:'V',srcNote:'FY25 investor pres Mar-25: 1,613 total branches (VF+LAP+HL+SME)',aum:'₹1,84,746cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','CG','UP','MP','DL','HR','WB','OD','PB','UK','BR','AS']},
+  {id:'chola_vf',  n:'Chola — Vehicle Fin',  cat:'chola', c:'#3366cc',br:1564,src:'V',srcNote:'FY25 investor pres Mar-25: 1,564 VF branches pan India',aum:'₹1,01,630cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','CG','UP','MP','DL','HR','WB','OD','PB','UK','BR','AS']},
+  {id:'chola_lap', n:'Chola — LAP',          cat:'chola', c:'#5588ee',br:780, src:'V',srcNote:'FY25 investor pres Mar-25: 780 LAP branches (771 co-located with VF); SME ₹24,474cr',aum:'₹33,776cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','CG','UP','MP','DL','HR','WB','OD','PB','UK','BR','AS']},
+  {id:'chola_hl',  n:'Chola — Home Loans',   cat:'chola', c:'#88aaff',br:710, src:'V',srcNote:'FY25 investor pres Mar-25: 710 HL branches (677 co-located with VF); affordable segment',aum:'₹17,416cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','CG','UP','MP','DL','HR','WB','OD','PB','UK','BR','AS']},
+  // Gold NBFC — parent gold loan network + separate housing subsidiaries
+  {id:'muthoot_gold',n:'Muthoot Finance (Gold)',cat:'gold', c:'#8a6010',br:7391,src:'V',srcNote:'Muthoot Finance Ltd FY25 results May-25: 7,391 gold loan branches',aum:'₹1,02,956cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','PY','GA','JK','HP','CH','MN','TR']},
+  {id:'muthoot_hf', n:'Muthoot Housing Fin',  cat:'gold',  c:'#c09a40',br:160, src:'V',srcNote:'Annual report FY25: 160 branches, 11 states; AUM ₹2,557cr (+24% YoY). Subsidiary of Muthoot Fincorp — DIFFERENT entity from Muthoot Finance Ltd',aum:'₹2,557cr',st:['KA','TN','AP','TS','MH','KE','GJ','RJ','UP','DL','OD']},
+  {id:'manappuram_gold',n:'Manappuram Finance (Gold)',cat:'gold',c:'#c09020',br:5286,src:'V',srcNote:'CARE Feb-25; consolidated Mar-24 (gold+microfinance+vehicle). Parent standalone gold AUM ~57%',aum:'₹42,070cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','PY','GA','AN','MN','TR']},
+  {id:'manappuram_hf',n:'Manappuram Home Fin', cat:'gold',  c:'#e0b840',br:89,  src:'V',srcNote:'CARE Feb-25: 89 branches Dec-24, 12 states; AUM ₹1,531cr; top state KA (22%). Wholly-owned subsidiary of Manappuram Finance',aum:'₹1,531cr',st:['KA','MH','TN','AP','TS','KE','GJ','RJ','UP','DL','MP','HR']},
+  // Vehicle financiers — total network, no segment split available
+  {id:'shriram',   n:'Shriram Finance (Total)',cat:'veh',  c:'#8030b0',br:3225,src:'V',srcNote:'Total company Dec-25: CV+2W+gold+SME+personal. No HL segment — housing arm demerged as Truhome Finance Dec-24',aum:'₹2,91,709cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS']},
+  {id:'hdb',       n:'HDB Financial (Total)', cat:'veh',   c:'#6020a0',br:1771,src:'V',srcNote:'Total company FY25 IPO note: enterprise+asset+consumer finance. No segment branch split published',aum:'₹1,07,262cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS']},
+  {id:'sundaramfin',n:'Sundaram Finance (Total)',cat:'veh', c:'#a040d0',br:600, src:'V',srcNote:'Total company sundaramfinance.in: vehicle finance. Housing via subsidiary Sundaram Home Finance (separate entry)',aum:'₹43,987cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','OD','WB','PB','CG']},
+  // PE-backed NBFC — MSME / LAP / housing
+  {id:'vistaar',   n:'Vistaar Finance',       cat:'msme',  c:'#0a7a8a',br:265, src:'V',srcNote:'CARE Jul-25; AUM ₹4,930cr Mar-25; Warburg Pincus',aum:'₹4,930cr', st:['KA','TN','AP','TS','MH','GJ','MP','RJ','HR','UP','OD','CG']},
+  // Small Finance Banks — full bank network (all products)
+  {id:'esafsfb',   n:'ESAF SFB (Total)',      cat:'sfb',   c:'#c04040',br:787, src:'V',srcNote:'FY25 Mar-25: 787 total bank branches; full bank incl. MFI+housing+gold+MSME+savings. No segment split',aum:'₹19,839cr',st:['KE','TN','MH','WB','MP','CG','UP','HR','RJ','GJ','AP','TS','KA','OD','AS','BR','JH','PB','UK','DL','HP','GA','MN','TR']},
+  {id:'ujjivansfb', n:'Ujjivan SFB (Total)',  cat:'sfb',   c:'#e06040',br:777, src:'V',srcNote:'Wikipedia Dec-25: 777 total bank branches; full bank incl. MFI+housing+gold+MSME. Housing book ₹5,800cr+. No segment split',aum:'₹30,344cr',st:['KA','TN','AP','TS','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','HP','MN','TR','AN']},
+];
+
+const CATS={
+  hfc_s:'HFC — South-focused',
+  hfc_n:'HFC — North / West',
+  hfc_p:'HFC — Pan-India (large groups)',
+  nbfc:'NBFC — property / business loans',
+  chola:'Cholamandalam — by segment',
+  nbfc_div:'Diversified NBFC (multi-product)',
+  gold:'Gold loan NBFC + housing subsidiaries',
+  veh:'Vehicle financier — total network',
+  msme:'NBFC — MSME / LAP (PE-backed)',
+  sfb:'Small Finance Bank — total network'
+};
+
+const SM={
+  TN:'Tamil Nadu',AP:'Andhra Pradesh',TS:'Telangana',KA:'Karnataka',
+  KE:'Kerala',PY:'Puducherry',MH:'Maharashtra',GJ:'Gujarat',
+  RJ:'Rajasthan',UP:'Uttar Pradesh',MP:'Madhya Pradesh',CG:'Chhattisgarh',
+  DL:'Delhi/NCR',HR:'Haryana',PB:'Punjab',HP:'Himachal Pradesh',
+  UK:'Uttarakhand',JK:'J&K',OD:'Odisha',WB:'West Bengal',
+  JH:'Jharkhand',BR:'Bihar',AS:'Assam/NE',AN:'Andaman',
+  GA:'Goa',MN:'Manipur',TR:'Tripura',CH:'Chandigarh',PD:'Puducherry',
+};
+
+const TD={
+  TN:[
+    {t:'Madurai',          l:['aptus','fivestar','sundarameb','sundaram','repco','canfin','homefirst','truhome','iifl','abhfl','pnbhf','bajajhf','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb','sundaramfin']},
+    {t:'Coimbatore',       l:['aptus','fivestar','sundarameb','sundaram','repco','canfin','homefirst','truhome','iifl','abhfl','pnbhf','bajajhf','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb','sundaramfin']},
+    {t:'Salem',            l:['aptus','fivestar','sundarameb','sundaram','repco','canfin','homefirst','truhome','abhfl','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb','sundaramfin']},
+    {t:'Trichy',           l:['aptus','fivestar','sundarameb','sundaram','repco','canfin','truhome','iifl','abhfl','pnbhf','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb','sundaramfin']},
+    {t:'Vellore',          l:['aptus','fivestar','sundarameb','sundaram','repco','canfin','homefirst','truhome','abhfl','muthoot_gold','manappuram_gold','shriram','hdb']},
+    {t:'Tirunelveli',      l:['aptus','fivestar','sundarameb','sundaram','repco','canfin','truhome','muthoot_gold','manappuram_gold','shriram','hdb','sundaramfin']},
+    {t:'Erode',            l:['aptus','fivestar','sundarameb','sundaram','repco','canfin','homefirst','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb','sundaramfin']},
+    {t:'Tirupur',          l:['aptus','fivestar','sundarameb','sundaram','repco','canfin','homefirst','muthoot_gold','manappuram_gold','shriram','hdb','sundaramfin']},
+    {t:'Kumbakonam',       l:['aptus','fivestar','sundarameb','sundaram','repco','canfin','muthoot_gold','manappuram_gold','shriram','hdb']},
+    {t:'Karaikudi',        l:['aptus','fivestar','sundarameb','repco','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Gobichettipalayam',l:['aptus','fivestar','sundarameb','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Aranthangi',       l:['aptus','fivestar','sundarameb','repco','muthoot_gold','manappuram_gold']},
+    {t:'Sankarankovil',    l:['aptus','fivestar','sundarameb','repco','muthoot_gold','manappuram_gold']},
+    {t:'Bodinayakanur',    l:['aptus','fivestar','sundarameb','muthoot_gold','manappuram_gold']},
+    {t:'Rasipuram',        l:['aptus','fivestar','sundarameb','repco','muthoot_gold','manappuram_gold']},
+    {t:'Tenkasi',          l:['aptus','fivestar','sundarameb','repco','muthoot_gold','manappuram_gold']},
+    {t:'Harur',            l:['aptus','fivestar','muthoot_gold','manappuram_gold']},
+    {t:'Kallakurichi',     l:['aptus','fivestar','sundarameb','repco','muthoot_gold','manappuram_gold']},
+    {t:'Panruti',          l:['aptus','fivestar','repco','muthoot_gold','manappuram_gold']},
+    {t:'Tirukoilur',       l:['aptus','fivestar','repco','muthoot_gold','manappuram_gold']},
+    {t:'Virudhunagar',     l:['aptus','fivestar','sundarameb','repco','muthoot_gold','manappuram_gold']},
+    {t:'Sivakasi',         l:['aptus','fivestar','sundarameb','repco','homefirst','muthoot_gold','manappuram_gold']},
+    {t:'Rajapalayam',      l:['aptus','fivestar','sundarameb','repco','muthoot_gold','manappuram_gold']},
+    {t:'Dindigul',         l:['aptus','fivestar','sundarameb','sundaram','repco','truhome','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Dharapuram',       l:['aptus','fivestar','sundarameb','muthoot_gold','manappuram_gold']},
+  ],
+  AP:[
+    {t:'Vijayawada',       l:['aptus','fivestar','vistaar','truhome','aadhar','sundaram','canfin','homefirst','iifl','abhfl','pnbhf','bajajhf','sammaan','gichf','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb','ujjivansfb']},
+    {t:'Visakhapatnam',    l:['aptus','fivestar','vistaar','truhome','aadhar','sundaram','canfin','homefirst','iifl','abhfl','pnbhf','bajajhf','sammaan','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb','ujjivansfb']},
+    {t:'Guntur',           l:['aptus','fivestar','vistaar','truhome','aadhar','sundaram','canfin','abhfl','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb','ujjivansfb']},
+    {t:'Kurnool',          l:['aptus','fivestar','vistaar','truhome','aadhar','sundaram','abhfl','chola_hl','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Nellore',          l:['aptus','fivestar','vistaar','truhome','aadhar','sundaram','chola_hl','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Tirupati',         l:['aptus','fivestar','truhome','aadhar','abhfl','iifl','muthoot_gold','manappuram_gold','shriram','hdb']},
+    {t:'Anantapur',        l:['aptus','fivestar','truhome','aadhar','abhfl','chola_hl','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Narasaraopet',     l:['aptus','fivestar','truhome','aadhar','muthoot_gold','manappuram_gold']},
+    {t:'Chirala',          l:['aptus','fivestar','truhome','aadhar','muthoot_gold','manappuram_gold']},
+    {t:'Bapatla',          l:['aptus','fivestar','aadhar','muthoot_gold','manappuram_gold']},
+    {t:'Tenali',           l:['aptus','fivestar','muthoot_gold','manappuram_gold']},
+    {t:'Bhimavaram',       l:['aptus','fivestar','truhome','muthoot_gold','manappuram_gold']},
+    {t:'Ongole',           l:['aptus','fivestar','truhome','aadhar','muthoot_gold','manappuram_gold']},
+    {t:'Machilipatnam',    l:['aptus','fivestar','truhome','sundaram','muthoot_gold','manappuram_gold']},
+    {t:'Proddatur',        l:['aptus','fivestar','truhome','aadhar','muthoot_gold','manappuram_gold']},
+    {t:'Kavali',           l:['aptus','fivestar','truhome','muthoot_gold','manappuram_gold']},
+    {t:'Nandyal',          l:['aptus','fivestar','muthoot_gold','manappuram_gold']},
+    {t:'Piduguralla',      l:['aptus','fivestar','aadhar','muthoot_gold']},
+    {t:'Adoni',            l:['aptus','truhome','aadhar','muthoot_gold','manappuram_gold']},
+    {t:'Repalle',          l:['aptus','muthoot_gold','manappuram_gold']},
+    {t:'Chilakaluripet',   l:['aptus','fivestar','muthoot_gold']},
+    {t:'Macherla',         l:['aptus','fivestar','muthoot_gold']},
+    {t:'Sompeta',          l:['aptus','muthoot_gold']},
+    {t:'Bethamcherla',     l:['aptus','muthoot_gold']},
+  ],
+  TS:[
+    {t:'Hyderabad belt',   l:['aptus','fivestar','vistaar','truhome','aadhar','canfin','homefirst','iifl','abhfl','pnbhf','bajajhf','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb','ujjivansfb']},
+    {t:'Warangal',         l:['aptus','fivestar','vistaar','truhome','abhfl','muthoot_gold','manappuram_gold','chola_hl','shriram','ujjivansfb']},
+    {t:'Karimnagar',       l:['aptus','fivestar','vistaar','truhome','muthoot_gold','manappuram_gold','shriram','ujjivansfb']},
+    {t:'Nizamabad',        l:['aptus','fivestar','vistaar','truhome','muthoot_gold','manappuram_gold','ujjivansfb']},
+    {t:'Khammam',          l:['aptus','fivestar','vistaar','truhome','muthoot_gold','manappuram_gold']},
+    {t:'Mahbubnagar',      l:['aptus','fivestar','truhome','muthoot_gold','manappuram_gold']},
+    {t:'Nalgonda',         l:['aptus','fivestar','vistaar','truhome','muthoot_gold','manappuram_gold']},
+    {t:'Suryapet',         l:['aptus','fivestar','vistaar','muthoot_gold','manappuram_gold']},
+    {t:'Siddipet',         l:['aptus','fivestar','vistaar','muthoot_gold','manappuram_gold']},
+    {t:'Jagtial',          l:['aptus','fivestar','vistaar','muthoot_gold','manappuram_gold']},
+    {t:'Mancherial',       l:['aptus','fivestar','muthoot_gold','manappuram_gold']},
+    {t:'Adilabad',         l:['aptus','fivestar','muthoot_gold','manappuram_gold']},
+    {t:'Miryalaguda',      l:['aptus','fivestar','muthoot_gold','manappuram_gold']},
+    {t:'Kollapur',         l:['aptus','fivestar','muthoot_gold']},
+    {t:'Bhongir',          l:['aptus','fivestar','muthoot_gold','manappuram_gold']},
+  ],
+  KA:[
+    {t:'Bengaluru',        l:['aptus','fivestar','vistaar','sundaram','canfin','homefirst','truhome','aadhar','indiashelter','iifl','abhfl','pnbhf','bajajhf','chola_hl','muthoot_gold','manappuram_gold','sbfc','shriram','hdb','sundaramfin','ujjivansfb','esafsfb']},
+    {t:'Mysuru',           l:['aptus','fivestar','vistaar','sundaram','canfin','truhome','abhfl','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb','ujjivansfb']},
+    {t:'Hubli-Dharwad',    l:['fivestar','vistaar','sundaram','canfin','truhome','abhfl','muthoot_gold','manappuram_gold','chola_hl','shriram','ujjivansfb']},
+    {t:'Belagavi',         l:['fivestar','sundaram','canfin','abhfl','muthoot_gold','manappuram_gold','shriram','ujjivansfb']},
+    {t:'Tumkur',           l:['aptus','fivestar','vistaar','muthoot_gold','manappuram_gold','shriram','ujjivansfb']},
+    {t:'Hospet/Ballari',   l:['aptus','fivestar','vistaar','sundaram','muthoot_gold','manappuram_gold']},
+    {t:'Mangaluru',        l:['fivestar','vistaar','sundaram','canfin','truhome','abhfl','muthoot_gold','manappuram_gold','chola_hl','shriram','ujjivansfb']},
+    {t:'Davangere',        l:['fivestar','vistaar','sundaram','canfin','abhfl','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Shivamogga',       l:['fivestar','vistaar','sundaram','muthoot_gold','manappuram_gold','ujjivansfb']},
+    {t:'Raichur',          l:['aptus','fivestar','vistaar','muthoot_gold','manappuram_gold']},
+    {t:'Chitradurga',      l:['aptus','fivestar','vistaar','muthoot_gold','manappuram_gold']},
+    {t:'Hassan',           l:['aptus','fivestar','muthoot_gold','manappuram_gold']},
+    {t:'Arasikere',        l:['aptus','muthoot_gold','manappuram_gold']},
+    {t:'Channarayapattna', l:['aptus','muthoot_gold']},
+    {t:'Harapanahalli',    l:['aptus','fivestar','muthoot_gold']},
+    {t:'Sindhanur',        l:['aptus','fivestar','muthoot_gold']},
+    {t:'Bagalkot',         l:['fivestar','vistaar','muthoot_gold','manappuram_gold']},
+    {t:'Gadag',            l:['fivestar','vistaar','muthoot_gold','manappuram_gold']},
+  ],
+  RJ:[
+    {t:'Jaipur',           l:['aavas','aadhar','canfin','homefirst','indiashelter','sbfc','iifl','abhfl','pnbhf','ltf','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb']},
+    {t:'Jodhpur',          l:['aavas','aadhar','indiashelter','abhfl','pnbhf','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Kota',             l:['aavas','aadhar','indiashelter','pnbhf','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Udaipur',          l:['aavas','aadhar','indiashelter','abhfl','pnbhf','muthoot_gold','manappuram_gold']},
+    {t:'Ajmer',            l:['aavas','aadhar','indiashelter','pnbhf','muthoot_gold','shriram']},
+    {t:'Bikaner',          l:['aavas','aadhar','indiashelter','pnbhf','muthoot_gold']},
+    {t:'Alwar',            l:['aavas','aadhar','indiashelter','muthoot_gold','shriram']},
+    {t:'Sikar',            l:['aavas','aadhar','muthoot_gold']},
+    {t:'Bhilwara',         l:['aavas','aadhar','indiashelter','muthoot_gold']},
+    {t:'Pali',             l:['aavas','indiashelter','muthoot_gold']},
+  ],
+  GJ:[
+    {t:'Ahmedabad',        l:['aavas','aadhar','homefirst','indiashelter','truhome','canfin','sbfc','iifl','abhfl','pnbhf','ltf','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb']},
+    {t:'Surat',            l:['aavas','aadhar','homefirst','indiashelter','truhome','abhfl','pnbhf','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb']},
+    {t:'Vadodara',         l:['aavas','aadhar','homefirst','indiashelter','abhfl','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Rajkot',           l:['aavas','aadhar','indiashelter','abhfl','pnbhf','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Bhavnagar',        l:['aavas','aadhar','indiashelter','abhfl','muthoot_gold','shriram']},
+    {t:'Anand',            l:['aavas','aadhar','indiashelter','abhfl','muthoot_gold','manappuram_gold']},
+  ],
+  MH:[
+    {t:'Pune',             l:['aavas','aadhar','canfin','homefirst','truhome','indiashelter','iifl','abhfl','pnbhf','ltf','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb']},
+    {t:'Nashik',           l:['aavas','aadhar','truhome','indiashelter','abhfl','pnbhf','chola_hl','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Aurangabad',       l:['aavas','aadhar','indiashelter','abhfl','pnbhf','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Nagpur',           l:['aavas','aadhar','truhome','indiashelter','abhfl','pnbhf','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb']},
+    {t:'Kolhapur',         l:['aavas','aadhar','truhome','indiashelter','abhfl','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Solapur',          l:['aadhar','indiashelter','pnbhf','muthoot_gold','manappuram_gold']},
+  ],
+  MP:[
+    {t:'Indore',           l:['aavas','aadhar','fivestar','indiashelter','sbfc','iifl','abhfl','pnbhf','ltf','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb']},
+    {t:'Bhopal',           l:['aavas','aadhar','fivestar','indiashelter','sbfc','abhfl','pnbhf','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Jabalpur',         l:['aavas','aadhar','fivestar','indiashelter','abhfl','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Gwalior',          l:['aavas','aadhar','fivestar','indiashelter','abhfl','muthoot_gold','manappuram_gold']},
+    {t:'Ujjain',           l:['aavas','aadhar','fivestar','indiashelter','abhfl','pnbhf','muthoot_gold']},
+  ],
+  UP:[
+    {t:'Lucknow',          l:['aavas','aadhar','canfin','sbfc','iifl','abhfl','pnbhf','ltf','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb']},
+    {t:'Kanpur',           l:['aavas','aadhar','sbfc','abhfl','pnbhf','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Agra',             l:['aavas','aadhar','sbfc','abhfl','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Varanasi',         l:['aavas','aadhar','pnbhf','ltf','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Gorakhpur',        l:['aavas','aadhar','muthoot_gold','manappuram_gold','shriram']},
+  ],
+  DL:[
+    {t:'Delhi NCR',        l:['aavas','aadhar','canfin','homefirst','sbfc','iifl','abhfl','pnbhf','ltf','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb']},
+    {t:'Noida/Gzb',       l:['aavas','aadhar','homefirst','sbfc','abhfl','pnbhf','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Gurgaon',          l:['aavas','aadhar','sbfc','abhfl','pnbhf','ltf','muthoot_gold','manappuram_gold','shriram','hdb']},
+  ],
+  KE:[
+    {t:'Kochi',            l:['repco','canfin','sundaram','truhome','iifl','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb','sundaramfin']},
+    {t:'Thiruvananthapuram',l:['repco','canfin','sundaram','truhome','iifl','muthoot_gold','manappuram_gold','shriram','sundaramfin']},
+    {t:'Kozhikode',        l:['repco','canfin','sundaram','muthoot_gold','manappuram_gold','shriram','sundaramfin']},
+    {t:'Thrissur',         l:['repco','canfin','sundaram','muthoot_gold','manappuram_gold','shriram','sundaramfin']},
+  ],
+  PB:[
+    {t:'Amritsar',         l:['aavas','aadhar','canfin','sbfc','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Ludhiana',         l:['aavas','aadhar','canfin','sbfc','muthoot_gold','manappuram_gold','shriram','hdb']},
+    {t:'Jalandhar',        l:['aavas','aadhar','sbfc','muthoot_gold','manappuram_gold','shriram']},
+  ],
+  OD:[
+    {t:'Bhubaneswar',      l:['aptus','aavas','aadhar','iifl','chola_hl','muthoot_gold','manappuram_gold','shriram','ujjivansfb','esafsfb']},
+    {t:'Cuttack',          l:['aptus','aavas','aadhar','muthoot_gold','manappuram_gold','ujjivansfb']},
+    {t:'Sambalpur',        l:['aptus','aavas','aadhar','muthoot_gold','ujjivansfb']},
+    {t:'Berhampur',        l:['aptus','aavas','aadhar','muthoot_gold','manappuram_gold','ujjivansfb']},
+    {t:'Rourkela',         l:['aavas','aadhar','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Balasore',         l:['aptus','aadhar','muthoot_gold','ujjivansfb']},
+    {t:'Bhadrak',          l:['aptus','aadhar','muthoot_gold']},
+    {t:'Angul',            l:['aptus','aadhar','muthoot_gold']},
+  ],
+  WB:[
+    {t:'Kolkata',          l:['aadhar','indiashelter','sbfc','iifl','chola_hl','muthoot_gold','manappuram_gold','shriram','hdb']},
+    {t:'Durgapur',         l:['aadhar','indiashelter','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Siliguri',         l:['aadhar','indiashelter','muthoot_gold','manappuram_gold']},
+  ],
+  HR:[
+    {t:'Panipat',          l:['aavas','aadhar','sbfc','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Rohtak',           l:['aavas','aadhar','sbfc','muthoot_gold','shriram']},
+    {t:'Hisar',            l:['aavas','aadhar','muthoot_gold','shriram']},
+  ],
+  CG:[
+    {t:'Raipur',           l:['aavas','aadhar','fivestar','indiashelter','sundaram','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Bilaspur',         l:['aavas','aadhar','fivestar','indiashelter','muthoot_gold','shriram']},
+    {t:'Durg/Bhilai',      l:['aavas','aadhar','fivestar','muthoot_gold','manappuram_gold','shriram']},
+  ],
+  JH:[
+    {t:'Ranchi',           l:['aadhar','indiashelter','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Jamshedpur',       l:['aadhar','indiashelter','muthoot_gold','manappuram_gold','shriram']},
+  ],
+  BR:[
+    {t:'Patna',            l:['aadhar','sbfc','iifl','muthoot_gold','manappuram_gold','shriram']},
+    {t:'Muzaffarpur',      l:['aadhar','muthoot_gold','manappuram_gold']},
+  ],
+};
+
+const TODOS=[
+  {id:1, done:true,  p:'h', txt:'Add vehicle financiers — Shriram (3,225 br), HDB Financial (1,771 br), Sundaram Finance (600 br) ✓'},
+  {id:2, done:true,  p:'h', txt:'Verify and refresh all branch counts to FY25 from primary sources (CARE, investor pres, company websites) ✓'},
+  {id:3, done:true,  p:'h', txt:'Add branch count comparison chart view ✓'},
+  {id:4, done:true,  p:'h', txt:'Rename to "India Financial Services Network" (not just affordable housing) ✓'},
+  {id:5, done:true,  p:'h', txt:'Add microfinance-to-housing crossovers — ESAF SFB (787 br, ₹19,839cr) and Ujjivan SFB (777 br, ₹30,344cr, housing book ₹5,800cr+) ✓'},
+  {id:6, done:true,  p:'m', txt:'Verify Five Star AP town list — FY25 state-wise: AP=234, TN=206, TS=115, MP=94, KA=59 (source: CARE Jun-25) ✓'},
+  {id:7, done:true,  p:'m', txt:'Add Bajaj Housing Finance (216 br, ₹1,14,684cr AUM) and GIC Housing Finance (72 br) ✓'},
+  {id:8, done:true,  p:'m', txt:'Add Vistaar Finance (265 br, ₹4,930cr AUM, Warburg Pincus — South India MSME/LAP, source: CARE Jul-25) ✓'},
+  {id:9, done:true,  p:'m', txt:'Deepen Karnataka (18 towns), Telangana (15 towns) and Odisha (8 towns) sub-district town data ✓'},
+  {id:10,done:true,  p:'l', txt:'Add Odisha state town data — 8 towns including Berhampur, Balasore, Bhadrak, Angul ✓'},
+  {id:11,done:true,  p:'l', txt:'Add Sammaan Capital (ex-Indiabulls HF, 220 br) and GIC Housing Finance (72 br) ✓'},
+  {id:12,done:true,  p:'l', txt:'Verify Repco: 189 branches + 44 satellite = 233 total (FY25 results, Mar-25) ✓'},
+];
+
+/* ── STATE ──────────────────────────────────────── */
+let base=null, comps=new Set(), st='AP', tdOpen=false, dbt=null, view='towns';
+const lb=id=>L.find(l=>l.id===id);
+const hc=n=>['h0','h1','h2','h3','h4','h5'][Math.min(n,5)];
+const getKey=()=>document.getElementById('api-key')?.value?.trim()||'';
+
+/* ── API KEY ──────────────────────────────────────── */
+document.getElementById('api-key').addEventListener('input',()=>{
+  const k=getKey();
+  const ok=k.startsWith('sk-');
+  document.getElementById('adot').className='api-dot'+(ok?' ok':'');
+  document.getElementById('api-key').classList.toggle('ok',ok);
+});
+
+/* ── TOGGLE LOGIC ──────────────────────────────── */
+function cycle(id){
+  if(id===base){base=null;comps.add(id);}
+  else if(comps.has(id)){comps.delete(id);}
+  else{if(base)comps.add(base);base=id;comps.delete(id);}
+  refreshToggles();draw();sched();
+}
+function refreshToggles(){
+  L.forEach(l=>{
+    const el=document.getElementById('lt'+l.id);if(!el)return;
+    const iB=l.id===base,iC=comps.has(l.id);
+    el.className='lt'+(iB?' ib':iC?' ic':'');
+    el.style.setProperty('--lc',l.c);
+    const ri=el.querySelector('.ri');
+    if(ri){ri.className='ri '+(iB?'rb':iC?'rc':'ro');ri.textContent=iB?'BASE':iC?'CMP':'';}
+  });
+}
+function preset(b,cs){base=b;comps=new Set(cs);refreshToggles();draw();sched();}
+function setView(v,el){
+  view=v;
+  document.querySelectorAll('.vt').forEach(t=>t.classList.remove('act'));
+  el.classList.add('act');draw();
+}
+const fmt=t=>'<p>'+t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n\n/g,'</p><p>')+'</p>';
+
+/* ── MAIN RENDER ──────────────────────────────── */
+function draw(){
+  const ct=document.getElementById('CT');
+  if(view==='help'){ct.innerHTML=buildHelp();return;}
+  const bO=base?lb(base):null;
+  const cOs=L.filter(l=>comps.has(l.id));
+  const all=[...(bO?[bO]:[]),...cOs];
+  const sn=SM[st]||st;
+
+  if(!bO&&cOs.length===0&&view!=='branches'){
+    ct.innerHTML=`<div class="em"><div class="big">Select lenders</div>Click any lender to set as <span style="color:var(--acc);font-weight:500">BASE</span><br>Click others to add as <span style="color:var(--green);font-weight:500">COMPARATORS</span><br><br>Or pick a preset in the sidebar</div>`;
+    return;
+  }
+
+  const raw=TD[st]||[];
+  const towns=raw.map(r=>({t:r.t,bP:bO?r.l.includes(bO.id):false,cP:cOs.filter(c=>r.l.includes(c.id))}));
+  const bOnly=towns.filter(r=>r.bP&&r.cP.length===0).length;
+  const ov=towns.filter(r=>r.bP&&r.cP.length>0).length;
+  const cOnly=towns.filter(r=>!r.bP&&r.cP.length>0).length;
+
+  let h='';
+
+  // STATS ROW
+  if(bO||cOs.length>0){
+    h+=`<div class="sr">
+      <div class="sc base-card"${bO?` style="--lc:${bO.c}"`:''}><div class="sv" style="font-size:14px;color:${bO?bO.c:'var(--t3)'}">${bO?bO.n:'—'}</div><div class="slb">${bO?'Base · '+bO.aum:'No base set'}</div></div>
+      <div class="sc"><div class="sv">${cOs.length}</div><div class="slb">Comparators</div></div>
+      <div class="sc"><div class="sv" style="color:var(--acc)">${bO?bOnly:'—'}</div><div class="slb">Base-exclusive</div></div>
+      <div class="sc"><div class="sv" style="color:#c05000">${ov}</div><div class="slb">Overlap towns</div></div>
+      <div class="sc"><div class="sv">${cOs.length?cOnly:'—'}</div><div class="slb">Comp-only</div></div>
+    </div>`;
+  }
+
+  // AI PANEL
+  if(bO||cOs.length>0){
+    const hasKey=getKey().startsWith('sk-');
+    h+=`<div class="aw"><div class="at"><div style="display:flex;align-items:center"><div class="adot${hasKey?' go':''}" id="DOT"></div><span class="atl">Claude analysis — ${sn}${bO?' · '+bO.n:''}</span></div><button onclick="runAI()" style="font-size:10px;padding:4px 12px;font-family:var(--head);font-weight:600;font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);border:none;color:var(--paper);border-radius:3px;cursor:pointer">↻ Refresh</button></div><div class="ab" id="AB"><span class="hint">${hasKey?'Analysis auto-runs when selection changes.':'Enter Anthropic API key (top right) to enable Claude analysis.'}</span></div></div>`;
+  }
+
+  // BRANCH COUNT CHART (when view=branches)
+  if(view==='branches'){
+    const toShow=all.length?all:L;
+    const sorted=[...toShow].sort((a,b)=>b.br-a.br);
+    const max=sorted[0]?.br||1;
+    h+=`<div class="tw"><div class="th"><span class="tt">Branch count comparison</span><span style="font-size:9px;color:var(--t3)">FY25 · sorted largest to smallest · V=verified · E=estimated</span></div><div class="bar-chart">`;
+    sorted.forEach(l=>{
+      const pct=Math.max((l.br/max)*100,2);
+      const isB=l.id===base,isC=comps.has(l.id);
+      const outline=isB?`2px solid ${l.c}`:isC?`1px solid color-mix(in srgb,${l.c} 40%,transparent)`:'none';
+      h+=`<div class="bar-row" title="${l.srcNote}">
+        <div class="bar-label" style="color:${isB||isC?l.c:'var(--t2)'};font-weight:${isB?'600':'400'}">${l.n}</div>
+        <div class="bar-track" style="outline:${outline};border-radius:3px">
+          <div class="bar-fill" style="width:${pct}%;background:${l.c}"><span class="bar-val">${l.br.toLocaleString()}</span></div>
+        </div>
+        <span class="bar-src ${l.src}">${l.src}</span>
+      </div>`;
+    });
+    h+=`<div style="margin-top:12px;font-size:10px;color:var(--t3);line-height:1.8">
+      <span style="color:var(--green);font-weight:500">V</span> = Verified from CARE ratings, investor presentations, company annual reports or official websites<br>
+      <span style="color:#8a5a00;font-weight:500">E</span> = Estimated / corroborated from secondary sources — treat with caution<br>
+      Hover any bar to see source note. Chola = 167 HL+LAP branches only (total group 1,387). L&T Finance = 850+ total company branches (HL/LAP is a product line — no standalone count). SBFC = 205 Mar-25 / 220 Jan-26.
+    </div></div></div>`;
+  }
+
+  // STATE COVERAGE MATRIX
+  if(view==='coverage'&&all.length){
+    const sts=Object.keys(SM).filter(s=>all.some(l=>l.st.includes(s))).sort();
+    h+=`<div class="tw"><div class="th"><span class="tt">State coverage matrix</span><span style="font-size:9px;color:var(--t3)">${sts.length} relevant states · ◀ = current state</span></div><div class="ts"><table><thead><tr><th>State</th>${all.map(l=>`<th style="text-align:center;color:${l.c}">${l.n}</th>`).join('')}<th style="text-align:center">n</th></tr></thead><tbody>`;
+    sts.forEach(code=>{
+      const cks=all.map(l=>l.st.includes(code));
+      const n=cks.filter(Boolean).length;
+      const cur=code===st;
+      h+=`<tr${cur?' style="background:color-mix(in srgb,var(--acc) 6%,transparent)"':''}><td style="font-size:11px;white-space:nowrap;font-weight:${cur?'500':'400'}">${SM[code]||code}${cur?' <span style="font-size:9px;color:var(--acc)">◀</span>':''}</td>${all.map((l,i)=>`<td style="text-align:center">${cks[i]?`<span style="color:${l.c};font-size:13px">●</span>`:'<span style="color:var(--bd2)">○</span>'}</td>`).join('')}<td style="text-align:center"><span class="hn ${hc(n)}">${n}</span></td></tr>`;
+    });
+    h+=`</tbody></table></div></div>`;
+  }
+
+  // TOWN PRESENCE TABLE
+  if(view==='towns'){
+    if(!raw.length){
+      h+=`<div class="tw"><div style="padding:20px;text-align:center;color:var(--t3);font-size:11px">No town data for ${sn}. States with data: AP TN KA TS RJ GJ MH MP UP DL KE PB OD WB HR CG JH BR</div></div>`;
+    } else if(all.length){
+      const sorted=[...towns].sort((a,b)=>b.cP.length-a.cP.length||b.bP-a.bP);
+      h+=`<div class="tw"><div class="th"><span class="tt">Town presence — ${sn}</span><span style="font-size:9px;color:var(--t3)">● base &nbsp;◆ comparator &nbsp;sorted by overlap density</span></div><div class="ts"><table><thead><tr><th>Town</th>${bO?`<th style="text-align:center;color:${bO.c};width:70px">${bO.n}</th>`:''}<th>Comparators present</th><th style="text-align:right;width:44px">n</th></tr></thead><tbody>`;
+      sorted.forEach(({t,bP,cP})=>{
+        const pills=cP.map(l=>`<span class="pill" style="background:color-mix(in srgb,${l.c} 10%,transparent);color:${l.c}">◆ ${l.n}</span>`).join('');
+        h+=`<tr><td style="font-weight:500;white-space:nowrap">${t}</td>${bO?`<td style="text-align:center">${bP?`<span style="color:${bO.c};font-size:14px">●</span>`:'<span style="color:var(--bd2)">○</span>'}</td>`:''}<td>${pills||`<span style="color:var(--t3);font-size:10px">none</span>`}</td><td style="text-align:right"><span class="hn ${hc(cP.length)}">${cP.length}</span></td></tr>`;
+      });
+      h+=`</tbody></table></div></div>`;
+    }
+  }
+
+  h+=buildTodo();
+  ct.innerHTML=h;
+}
+
+/* ── TO-DO ──────────────────────────────────────── */
+function buildHelp(){
+  const verifiedCount=L.filter(l=>l.src==='V').length;
+  const estimatedCount=L.filter(l=>l.src==='E').length;
+  return `<div class="help-wrap">
+    <div class="help-section">
+      <div class="help-h1">India Financial Services Network<br><span style="font-size:15px;font-weight:400;color:var(--t2)">Competitive Intelligence Dashboard — User Guide &amp; Sources</span></div>
+      <p class="help-p">This dashboard maps the branch networks of <b>28 lenders</b> across housing finance, NBFCs, gold loan companies, vehicle financiers, PE-backed SME lenders, and small finance banks. It is designed for investors and analysts tracking competitive dynamics in India's semi-urban and informal lending market — particularly around Aptus Value Housing Finance and its peer group.</p>
+    </div>
+
+    <div class="help-section">
+      <div class="help-h2">How to use</div>
+      <div class="help-grid">
+        <div class="hcard">
+          <div class="hcard-t">1. Set a Base lender</div>
+          <p>Click any lender in the sidebar once. It turns <b style="color:var(--acc)">blue with a BASE badge</b>. This is the lender you're analysing — typically the one you're researching or invested in.</p>
+          <p>Only one base at a time. Clicking a new lender as base automatically demotes the previous base to a comparator.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-t">2. Add Comparators</div>
+          <p>Click other lenders to add them as <b style="color:var(--green)">comparators (green CMP badge)</b>. Click a third time to remove.</p>
+          <p>Use the preset buttons at the top of the sidebar for common combinations — e.g. "Aptus vs HFCs" or "Chola vs South".</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-t">3. Select a State</div>
+          <p>Click any state code in the State grid. <b>States with town-level data are shown brighter</b> (AP, TN, KA, TS, RJ, GJ, MH, MP, UP, DL, KE, PB, OD, WB, HR, CG, JH, BR).</p>
+          <p>States without town data still show in the State Matrix — they just won't have a town-by-town breakdown.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-t">4. Read the views</div>
+          <p><b>Town presence</b> — for the selected state, which towns have the base lender and which have comparators. Sorted by overlap density.</p>
+          <p><b>State matrix</b> — ●/○ for every state across all selected lenders. Overlap count heat-coded.</p>
+          <p><b>Branch count chart</b> — ranked horizontal bar chart of all selected lenders by total branches.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-t">5. Claude analysis</div>
+          <p>Enter your <b>Anthropic API key</b> (sk-ant-...) in the top-right field. The analysis panel auto-runs when you change your selection.</p>
+          <p>The prompt is fully contextualised with the base/comparator setup, state, town-overlap data, and all verified FY25 branch counts. It asks Claude to distinguish whether lenders compete for the same towns <i>and</i> the same customers.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-t">6. Branch count chart</div>
+          <p>Use <b>"Branch chart (all)"</b> preset or the Branch count chart tab to compare total network size across all lenders.</p>
+          <p>Hover any bar to see the exact source note. <b style="color:#0a6640">V = verified</b> from a primary source. <b style="color:#7a4000">E = estimated</b> — treat with caution. L&amp;T Finance's 850 is the full company (all products); no standalone HL count exists.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="help-section">
+      <div class="help-h2">Data sources — all 28 lenders</div>
+      <p class="help-p">Branch counts are as of <b>March 31, 2025 (FY25 end)</b> unless stated otherwise. ${verifiedCount} of 28 lenders are verified from primary sources. The one <span class="be">E</span> lender (L&amp;T Finance) is not a data quality issue — it is structurally impossible to verify since L&amp;T does not publish a standalone HL/LAP branch count. The 850 shown is their total company network across all product lines.</p>
+      <table class="src-tbl">
+        <thead><tr><th>Lender</th><th>Branches</th><th>Quality</th><th>Source &amp; date</th><th>AUM / scale note</th></tr></thead>
+        <tbody>
+${L.map(l=>`          <tr><td style="font-weight:500;color:var(--t1)">${l.n}</td><td style="font-family:var(--mono);text-align:right">${l.br.toLocaleString()}</td><td><span class="b${l.src==='V'?'v':'e'}">${l.src}</span>${l.src==='E'?` <span style="font-size:10px;color:var(--t3);font-style:italic">no primary count</span>`:''}</td><td>${l.srcNote}</td><td style="color:var(--t3)">${l.aum}</td></tr>`).join('\n')}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="help-section">
+      <div class="help-h2">Lender categories explained</div>
+      <div class="help-grid">
+        <div class="hcard">
+          <div class="hcard-t">HFC — South-focused</div>
+          <p>Housing Finance Companies with primary exposure to South India (TN, AP, TS, KA). Aptus, Repco, Home First, Truhome, Sundaram HF, Sundaram EB division, CanFin Homes. These compete most directly with each other at the town level in South India.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-t">HFC — North / West</div>
+          <p>HFCs focused on Rajasthan, Gujarat, MP, Maharashtra, UP belt. Aavas Financiers and India Shelter FC. <b>Aavas has zero South India presence</b> — it is not a direct competitor to Aptus at the town level despite being a frequently cited peer.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-t">HFC — Pan-India (large groups)</div>
+          <p>Aadhar Housing Finance, PNB HF (Roshni), Aditya Birla HF, IIFL Home Finance, Bajaj Housing Finance, GIC Housing Finance, Sammaan Capital. Operate across 18–21 states. Bajaj HF is prime/near-prime salaried — minimal overlap with informal income segment. Sammaan reported ₹1,807cr loss FY25 from provisioning cleanup.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-t">NBFC — property / business loans</div>
+          <p>Five Star BF, SBFC Finance. Five Star is the most important competitor to Aptus — same semi-urban self-employed informal income customer, property-backed. <b>Five Star grew from 520 to 748 branches in FY25 (+44%), with AP=234 now their #1 state.</b></p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-t">Cholamandalam — by segment</div>
+          <p>Four selectable segments: <b>Chola Total</b> (1,613 br), <b>Chola VF</b> (1,564 br), <b>Chola LAP</b> (780 br), <b>Chola HL</b> (710 br). All from FY25 investor presentation. LAP and HL branches are largely co-located within the VF network (77% and 95% respectively). The key analytical use: set <b>Chola VF as BASE and Chola HL as COMPARATOR</b> — towns where VF has penetrated but HL hasn't = whitespace for HL product expansion.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-t">Diversified NBFC</div>
+          <p>L&amp;T Finance — multi-product NBFC. Branch count of 850 covers all products; HL/LAP has no standalone count. Included for state coverage mapping only.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-t">Gold loan NBFC + housing subsidiaries</div>
+          <p><b>Muthoot Finance (Gold)</b>: 7,391 gold loan branches — the widest physical network in India after banks. <b>Muthoot Housing Finance</b>: 160 branches, ₹2,557cr AUM — this is a <i>separate company</i> (subsidiary of Muthoot Fincorp / Muthoot Pappachan Group, not affiliated with Muthoot Finance Ltd / George Muthoot Group).</p>
+          <p><b>Manappuram Finance (Gold)</b>: 5,286 consolidated branches (gold+MFI+vehicle). <b>Manappuram Home Finance</b>: 89 branches, 12 states, ₹1,531cr AUM — wholly-owned subsidiary of Manappuram Finance.</p>
+          <p>Use case: compare gold network penetration vs housing arm penetration to find towns where the gold relationship exists but home loan cross-sell hasn't happened.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-t">Vehicle financier — total network</div>
+          <p><b>Shriram Finance</b> (3,225 br): CV+2W+gold+SME+personal. Housing arm demerged as Truhome Finance in Dec-24 — already a separate entry in this dashboard. No HL segment remains in Shriram Finance.</p>
+          <p><b>HDB Financial</b> (1,771 br): HDFC Bank subsidiary, enterprise+asset+consumer finance. No segment breakdown published.</p>
+          <p><b>Sundaram Finance</b> (600 br): vehicle finance only. Housing via subsidiary Sundaram Home Finance — already a separate entry. These branch counts are total-company and no segment split is available.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-t">NBFC — MSME/LAP (PE-backed)</div>
+          <p>Vistaar Finance (265 br, Warburg Pincus). Bengaluru-based, property-backed MSME loans to informal income borrowers in rural/semi-urban South India. KA and TN are its primary states. Structurally identical product and customer to Five Star and Aptus.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-t">Small Finance Bank — total network</div>
+          <p><b>ESAF SFB</b> (787 br) and <b>Ujjivan SFB</b> (777 br). These are full-bank branch counts covering all products — savings, MFI, housing, gold, MSME. No segment-level branch split is published by either bank.</p>
+          <p>Ujjivan's affordable housing book has crossed ₹5,800cr (+43% YoY) — a meaningful portion of branches actively originate housing. ESAF's secured portfolio (which includes housing) grew to 51% of the book in FY25. Use these as proxies for <i>potential</i> housing network reach, not confirmed housing-only branches.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="help-section">
+      <div class="help-h2">Town data — coverage and caveats</div>
+      <p class="help-p">Town-level presence data is <b>indicative, not exhaustive</b>. It is compiled from branch locators, CARE Ratings press releases, GST registration databases, company investor presentations, and verified press reports. It maps whether a lender has at least one branch in a town — not how many. It does not capture DSA/agent networks, which can be significant for pan-India players.</p>
+      <p class="help-p"><b>States with town data:</b> AP (24 towns), TN (25 towns), KA (18 towns), TS (15 towns), RJ (10 towns), GJ (6 towns), MH (6 towns), MP (5 towns), UP (5 towns), DL (3 towns), KE (4 towns), PB (3 towns), OD (8 towns), WB (3 towns), HR (3 towns), CG (3 towns), JH (2 towns), BR (2 towns).</p>
+      <p class="help-p"><b>Known gaps:</b> Five Star's 234 AP branches (FY25) are distributed across many more towns than shown. Muthoot and Manappuram are present in almost every AP/TN town at the mandal level — their presence in "exclusive" Aptus towns should be assumed unless contradicted by specific data.</p>
+    </div>
+
+    <div class="help-section">
+      <div class="help-h2">Key data quality flags</div>
+      <p class="help-p" style="padding:12px 14px;background:var(--surface);border:1px solid var(--bd);border-radius:6px;font-size:12px">
+        <b>Cholamandalam segments:</b> VF/LAP/HL branches are from Chola's own FY25 investor presentation. LAP (780) and HL (710) are largely co-located within VF branches (77% and 95% respectively). "Chola VF present but HL absent" at town level reflects a product deployment decision, not physical absence.<br><br>
+        <b>Muthoot group warning:</b> Muthoot Finance Ltd (George Muthoot Group, 7,391 branches) and Muthoot Housing Finance (Muthoot Fincorp / Muthoot Pappachan Group, 160 branches) are <i>completely different companies</i> with different promoters. Do not infer any network relationship between them.<br><br>
+        <b>Manappuram Home Finance:</b> 89 branches as of December 2024 (CARE Feb-25). FY25 year-end figure not yet published. AUM ₹1,531cr as of March 2024.<br><br>
+        <b>Shriram Finance:</b> 3,225 branches cover all segments — CV, 2W, gold, SME, personal. The housing arm (formerly Shriram Housing Finance) was demerged and sold to Warburg Pincus in December 2024, now operating as Truhome Finance (separate dashboard entry).<br><br>
+        <b>ESAF / Ujjivan SFBs:</b> Branch counts are full bank totals — all products. No published segment-level branch split. Housing origination happens at a subset of these branches.<br><br>
+        <b>Sammaan Capital AUM:</b> ₹70,000cr approximate. ₹1,807cr net loss FY25 from provisioning cleanup of ₹5,068cr. Branch count and state presence are operationally correct.<br><br>
+        <b>L&amp;T Finance:</b> 850 = total company, all products. No standalone HL/LAP branch count published. Use for state coverage mapping only.<br><br>
+        <b>ABHFL AUM:</b> ₹42,204cr (Dec-25, company website). Previous IFC figure of ₹23,236cr (Sep-24) was outdated — 82% understatement.<br><br>
+        <b>Sundaram EB:</b> 72-branch sub-division of Sundaram Home Finance targeting Tier 3/4 towns. Counted separately because the customer profile is different from Sundaram HF's main book.
+      </p>
+    </div>
+  </div>`;
+}
+
+function buildTodo(){
+  const pc={h:'prh',m:'prm',l:'prl'},pl={h:'HIGH',m:'MED',l:'LOW'};
+  const pend=TODOS.filter(t=>!t.done).length,done=TODOS.length-pend;
+  return `<div class="todo-wrap"><div class="todo-top" onclick="flipTodo()"><div style="display:flex;align-items:center;gap:8px"><span style="font-family:var(--head);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--t2)">Research to-do</span><span style="font-size:9px;padding:2px 7px;border-radius:10px;background:var(--surf2);border:1px solid var(--bd2);color:var(--t3)">${pend} open · ${done} done</span></div><span style="font-size:10px;color:var(--t3)">${tdOpen?'▲':'▼'}</span></div>${tdOpen?`<div class="todo-body">${TODOS.map(t=>`<div class="ti${t.done?' dn':''}"><span class="tic" onclick="tickTodo(${t.id})">${t.done?'✓':'☐'}</span><span class="pr ${pc[t.p]}">${pl[t.p]}</span><span class="titx">${t.txt}</span></div>`).join('')}<div style="padding-top:6px;font-size:10px;color:var(--t3)">Click ☐ to tick off. Items persist during session.</div></div>`:''}</div>`;
+}
+function flipTodo(){tdOpen=!tdOpen;const tw=document.querySelector('.todo-wrap');if(tw)tw.outerHTML=buildTodo();}
+function tickTodo(id){const t=TODOS.find(x=>x.id===id);if(t)t.done=!t.done;const tw=document.querySelector('.todo-wrap');if(tw)tw.outerHTML=buildTodo();}
+
+/* ── CLAUDE ANALYSIS ────────────────────────────── */
+function sched(){clearTimeout(dbt);if(!base&&comps.size===0)return;if(!getKey().startsWith('sk-'))return;dbt=setTimeout(runAI,900);}
+
+async function runAI(){
+  const key=getKey();
+  if(!key.startsWith('sk-')){const ab=document.getElementById('AB');if(ab)ab.innerHTML='<span class="hint">Enter Anthropic API key (top right) to enable analysis.</span>';return;}
+  const bO=base?lb(base):null;
+  const cOs=L.filter(l=>comps.has(l.id));
+  if(!bO&&cOs.length===0)return;
+  const sn=SM[st]||st;
+  const raw=TD[st]||[];
+  const towns=raw.map(r=>({t:r.t,bP:bO?r.l.includes(bO.id):false,cP:cOs.filter(c=>r.l.includes(c.id))}));
+  const bOnly=towns.filter(r=>r.bP&&r.cP.length===0);
+  const ov=towns.filter(r=>r.bP&&r.cP.length>0);
+  const cOnly=towns.filter(r=>!r.bP&&r.cP.length>0);
+  const ovD=cOs.map(l=>({n:l.n,c:towns.filter(r=>r.bP&&r.cP.some(x=>x.id===l.id)).length}));
+
+  const dot=document.getElementById('DOT'),ab=document.getElementById('AB');
+  if(!dot||!ab)return;
+  dot.className='adot spin';ab.innerHTML='<span class="hint">Generating analysis…</span>';
+
+  const prompt=`You are a senior financial analyst specialising in Indian non-bank lending. A user is running a BASE vs COMPARATOR analysis.
+
+BASE LENDER: ${bO?`${bO.n} — ${bO.br.toLocaleString()} branches (${bO.src}), AUM ${bO.aum}, ${bO.st.length} states: ${bO.st.join(', ')}`:'none'}
+COMPARATORS (${cOs.length}): ${cOs.map(l=>`${l.n} [${l.br.toLocaleString()} br, ${l.aum}, ${l.st.length} states]`).join(' | ')||'none'}
+STATE: ${sn} — base present: ${bO?.st.includes(st)||false} | comps present in state: ${cOs.filter(l=>l.st.includes(st)).map(l=>l.n).join(', ')||'none'}
+
+TOWN DATA (${sn}, ${raw.length} sample towns):
+- Base-exclusive (no comp): ${bOnly.length} towns — ${bOnly.slice(0,4).map(r=>r.t).join(', ')||'none'}
+- Base + comp overlap: ${ov.length} towns — ${ov.slice(0,4).map(r=>r.t).join(', ')||'none'}
+- Comp-only (base absent): ${cOnly.length} towns — ${cOnly.slice(0,4).map(r=>r.t).join(', ')||'none'}
+- Overlap per comparator: ${ovD.map(d=>`${d.n}: ${d.c} shared towns`).join('; ')||'n/a'}
+
+KEY FACTS (all verified FY25 from primary sources):
+- Aptus Value HF: 300 branches (Mar-25, CARE), TN/AP/TS/KA/OD/MH; AP=42% AUM, TN=33%; RoA ~8%, RoE ~20%; semi-urban self-employed informal income
+- Five Star BF: 748 branches (FY25, CARE Jun-25; grew from 520 in FY24 — +44% in one year), 11 states; NBFC targeting identical semi-urban self-employed segment with property collateral
+- Repco Home Finance: 189 branches + 44 satellite centres = 233 total (FY25 Mar-25); South-focused, TN/AP/TS/KA etc.
+- CanFin Homes: 234 branches (FY25); pan-South plus North
+- Aavas: 397 branches (FY25), purely North/West (RJ/GJ/MH/MP/UP etc.), ZERO South India presence
+- India Shelter FC: 266 branches (FY25 CARE), North/West/Central; entering South (KA, TN, TS)
+- Aadhar Housing Finance: 575 branches (FY25, 57 added), 21 states, largest affordable HFC by network
+- Bajaj Housing Finance: 216 branches, 174 locations, 21 states (FY25 results Apr-25); AUM ₹1,14,684cr; prime/near-prime salaried segment, NOT informal income — minimal overlap with Aptus customer base
+- GIC Housing Finance: 72 branch offices + 5 satellite + 4 hub = 81 total (Mar-25); government-promoted, mid-market, salaried
+- Sammaan Capital (ex-Indiabulls HF): ~220 branches (Jun-25); pan-India; restructuring phase, reported ₹1,807cr loss FY25 due to provisioning cleanup
+- PNB Housing Finance: 356 branches/outreach (Mar-25, Q4FY25 results); 200 Roshni affordable branches targeting Tier 2/3 explicitly; Chennai/Coimbatore/Hyderabad active
+- Aditya Birla HF (ABHFL): 168 branches (Dec-25, verified), AUM ₹42,204cr; confirmed AP/TN/TS/KA; mid-market tilting Tier 2/3
+- L&T Finance (HL+LAP): 850+ total branches (HL/LAP is a product line, no standalone count); retail book ₹95,180cr; formal salaried focus, min ticket ₹20L — limited overlap with Aptus informal income segment
+- IIFL Home Finance: 315 branches, 18 states (company website, current); AUM ₹27,000cr; pan-India affordable+near-prime
+- Chola segments (FY25 investor pres): VF=1,564 branches (total network), LAP=780 (771 co-located with VF), HL=710 (677 co-located with VF), Total=1,613. LAP and HL are mostly co-located within VF branches — selecting Chola VF vs Chola HL shows towns where VF has penetrated but HL has not yet deployed
+- Muthoot Finance (Gold): 7,391 gold loan branches (FY25). Housing is via Muthoot Housing Finance — a SEPARATE subsidiary of Muthoot Fincorp (different group entirely from Muthoot Finance Ltd), 160 branches, ₹2,557cr AUM
+- Muthoot Housing Finance: 160 branches, 11 states (annual report FY25); KA/TN/AP primary. Subsidiary of Muthoot Fincorp (Muthoot Pappachan Group) — not affiliated with Muthoot Finance Ltd (George Muthoot Group)
+- Manappuram Finance (Gold): 5,286 gold+MFI+vehicle branches (consolidated Mar-24). Non-gold = 42.7% of AUM as of Mar-25
+- Manappuram Home Finance: 89 branches, 12 states (Dec-24 CARE); AUM ₹1,531cr; KA=22% top state. Wholly-owned subsidiary of Manappuram Finance
+- Shriram Finance: 3,225 branches (Dec-25); merged STFC+SCUF, vehicle finance cross-selling LAP/HL, deep Tier 2/3 rural
+- HDB Financial: 1,771 branches (FY25 IPO note); HDFC Bank subsidiary, avg ticket ₹165K, secured business loans, 31 states
+- Sundaram Finance: 600 branches; South India vehicle finance cross-selling home/LAP
+- Vistaar Finance: 265 branches (CARE Jul-25), AUM ₹4,930cr (Mar-25); Warburg Pincus-backed NBFC; MSME/LAP focus in rural/semi-urban South India (KA, TN, AP, TS primarily); property-backed loans to informal income MSMEs — very close substitute to Aptus customer
+- ESAF Small Finance Bank: 787 branches (FY25), 24 states; Kerala-origin MFI-turned-SFB; micro-housing and LAP growing rapidly (51% secured book); genuinely competes with Aptus in AP/TN/TS/KA customer segment
+- Ujjivan Small Finance Bank: 777 branches (Dec-25); Bengaluru-origin; affordable housing book ₹5,800cr+ (43% YoY growth); cross-selling housing to existing MFI/micro-banking customers — same base community as Aptus targets
+
+Provide a sharp 3-4 paragraph analysis:
+1. Are base and comparators fighting for same towns AND same customers, or different strata? Use the verified FY25 branch counts to assess relative scale.
+2. 2-3 sharpest risks/opportunities for base in ${sn} from these specific comparators
+3. Where is base's genuine white space and how durable? Reference specific towns where relevant.
+4. One crisp investment/strategic conclusion referencing actual FY25 branch numbers
+
+Name specific lenders, towns, AUM/branch numbers. No generic filler. Max 290 words.`;
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-opus-4-5',max_tokens:900,stream:true,messages:[{role:'user',content:prompt}]})
+    });
+    if(!res.ok){const e=await res.text();throw new Error(`API ${res.status}: ${e.slice(0,100)}`);}
+    ab.innerHTML='<div id="ST" class="cur"></div>';
+    const se=document.getElementById('ST');
+    const reader=res.body.getReader(),dec=new TextDecoder();
+    let full='';
+    while(true){
+      const{done,value}=await reader.read();if(done)break;
+      for(const line of dec.decode(value).split('\n')){
+        if(!line.startsWith('data: '))continue;
+        const d=line.slice(6).trim();if(d==='[DONE]')continue;
+        try{const p=JSON.parse(d);if(p.delta?.text){full+=p.delta.text;if(se){se.className='cur';se.innerHTML=fmt(full);}}}catch{}
+      }
+    }
+    if(se){se.className='';se.innerHTML=fmt(full);}
+  }catch(e){
+    if(ab)ab.innerHTML=`<span style="color:#c01000;font-size:12px">Error: ${e.message}</span>`;
+  }finally{
+    if(dot)dot.className='adot go';
+  }
+}
+
+/* ── INIT SIDEBAR ──────────────────────────────── */
+function initSidebar(){
+  const pr=document.getElementById('PR');
+  [
+    // HFC comparisons
+    ['Aptus vs HFCs South', ()=>preset('aptus',['fivestar','truhome','repco','sundaram','canfin','homefirst'])],
+    ['Aptus vs HFCs Pan',   ()=>preset('aptus',['pnbhf','abhfl','iifl','aadhar'])],
+    ['Aptus vs SFBs',       ()=>preset('aptus',['ujjivansfb','esafsfb','vistaar','fivestar'])],
+    ['Aptus vs Gold HF',    ()=>preset('aptus',['muthoot_hf','manappuram_hf','muthoot_gold'])],
+    // Chola segment analysis
+    ['Chola: VF vs HL',     ()=>preset('chola_vf',['chola_hl','chola_lap'])],
+    ['Chola HL vs Aptus',   ()=>preset('chola_hl',['aptus','fivestar','truhome','aadhar'])],
+    ['Chola HL vs Big HFCs',()=>preset('chola_hl',['ltf','abhfl','pnbhf'])],
+    // Gold network penetration
+    ['Gold reach vs HFCs',  ()=>preset('muthoot_gold',['manappuram_gold','aptus','fivestar'])],
+    ['Housing arms vs peers',()=>preset('muthoot_hf',['manappuram_hf','aptus','homefirst'])],
+    // Vehicle cross-sell
+    ['Chola VF vs HL vs LAP',()=>preset('chola_vf',['chola_hl','chola_lap'])],
+    ['Shriram+HDB vs HFCs', ()=>preset('shriram',['hdb','chola_hl','fivestar','aptus'])],
+    // Other
+    ['Bajaj HF vs peers',   ()=>preset('bajajhf',['pnbhf','abhfl','iifl','sammaan'])],
+    ['Aavas vs peers',      ()=>preset('aavas',['indiashelter','sbfc','homefirst','aadhar'])],
+    ['Five Star vs Aptus',  ()=>preset('fivestar',['aptus','truhome','vistaar','sbfc'])],
+    ['Branch chart (all)',  ()=>{base=null;comps=new Set();refreshToggles();view='branches';document.querySelectorAll('.vt').forEach(t=>t.classList.remove('act'));document.querySelectorAll('.vt')[2]?.classList.add('act');draw();}],
+    ['Clear all',           ()=>{base=null;comps=new Set();refreshToggles();draw();},true],
+  ].forEach(([lbl,fn,danger])=>{
+    const b=document.createElement('button');
+    b.className='pb'+(danger?' red':'');b.textContent=lbl;b.onclick=fn;pr.appendChild(b);
+  });
+
+  const ll=document.getElementById('LL');
+  [...new Set(L.map(l=>l.cat))].forEach(cat=>{
+    const hd=document.createElement('div');hd.className='cat-label';hd.textContent=CATS[cat]||cat;ll.appendChild(hd);
+    L.filter(l=>l.cat===cat).forEach(l=>{
+      const el=document.createElement('div');
+      el.id='lt'+l.id;el.className='lt';el.style.setProperty('--lc',l.c);
+      el.title=`${l.br.toLocaleString()} branches · ${l.srcNote}`;
+      el.innerHTML=`<span class="ri ro"></span><span class="lname">${l.n}</span><span class="lbr">${l.br.toLocaleString()}</span><span class="lsrc ${l.src}">${l.src}</span>`;
+      el.onclick=()=>cycle(l.id);ll.appendChild(el);
+    });
+  });
+
+  const sg=document.getElementById('SG');
+  Object.keys(SM).sort((a,b)=>SM[a].localeCompare(SM[b])).forEach(code=>{
+    const btn=document.createElement('button');
+    btn.className='stb'+(code===st?' act':'')+(TD[code]?' hd':'');
+    btn.textContent=code;btn.title=SM[code];
+    btn.onclick=()=>{st=code;document.querySelectorAll('.stb').forEach(b=>b.classList.remove('act'));btn.classList.add('act');draw();sched();};
+    sg.appendChild(btn);
+  });
+}
+
+initSidebar();
+preset('aptus',['fivestar','truhome','chola_hl','muthoot_hf']);
+</script>
+</body>
+</html>
