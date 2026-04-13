@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>India Financial Services Network — Competitive Intelligence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@400;500;600&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -14,9 +14,9 @@
   --t1:#0a0c0f;--t2:#4a4640;--t3:#9a948a;
   --acc:#1a3a8f;--acc2:#e8420a;--green:#0a6640;
   --mono:'DM Mono',monospace;--head:'Syne',sans-serif;
-  --sans:'DM Mono',monospace;
+  --sans:'Inter','DM Mono',system-ui,sans-serif;
 }
-body{background:var(--paper);color:var(--t1);font-family:var(--mono);font-size:12px;min-height:100vh;overflow:hidden}
+body{background:var(--paper);color:var(--t1);font-family:var(--sans);font-size:13px;min-height:100vh;overflow:hidden}
 .shell{display:grid;grid-template-columns:280px 1fr;grid-template-rows:56px 1fr;height:100vh}
 
 /* TOPBAR */
@@ -57,7 +57,7 @@ body{background:var(--paper);color:var(--t1);font-family:var(--mono);font-size:1
 .rb{background:color-mix(in srgb,var(--lc) 15%,transparent);color:var(--lc)}
 .rc{background:color-mix(in srgb,var(--lc) 8%,transparent);color:color-mix(in srgb,var(--lc) 60%,var(--t3))}
 .ro{background:transparent;color:transparent}
-.lname{font-size:11px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.lname{font-size:12px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
 .lt.ib .lname,.lt.ic .lname{color:var(--t1)}
 .lbr{font-size:9px;color:var(--t3);flex-shrink:0;font-family:var(--mono)}
 .lsrc{font-size:8px;color:var(--t3);flex-shrink:0}
@@ -74,7 +74,7 @@ body{background:var(--paper);color:var(--t1);font-family:var(--mono);font-size:1
 /* MAIN */
 .main{overflow-y:auto;background:var(--paper);display:flex;flex-direction:column}
 .vtabs{display:flex;background:var(--surface);border-bottom:1px solid var(--bd);padding:0 20px;gap:0;flex-shrink:0}
-.vt{font-size:10px;font-family:var(--head);font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;cursor:pointer;color:var(--t3);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .1s}
+.vt{font-size:11px;font-family:var(--head);font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;cursor:pointer;color:var(--t3);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .1s}
 .vt:hover{color:var(--t1)}
 .vt.act{color:var(--acc);border-bottom-color:var(--acc)}
 .ct{padding:20px;flex:1}
@@ -91,9 +91,9 @@ body{background:var(--paper);color:var(--t1);font-family:var(--mono);font-size:1
 .th{padding:10px 16px;background:var(--surf2);border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
 .tt{font-family:var(--head);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)}
 .ts{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:11px}
-th{font-size:9px;font-family:var(--head);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);padding:7px 12px;background:var(--surf2);border-bottom:1px solid var(--bd);text-align:left;white-space:nowrap}
-td{padding:6px 12px;border-bottom:1px solid color-mix(in srgb,var(--bd) 50%,transparent);vertical-align:middle}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{font-size:10px;font-family:var(--head);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);padding:8px 14px;background:var(--surf2);border-bottom:1px solid var(--bd);text-align:left;white-space:nowrap}
+td{padding:8px 14px;border-bottom:1px solid color-mix(in srgb,var(--bd) 50%,transparent);vertical-align:middle}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:var(--surf2)}
 .pill{font-size:9px;padding:2px 6px;border-radius:3px;font-family:var(--mono);white-space:nowrap;display:inline-block;margin:1px}
@@ -172,6 +172,17 @@ tr:hover td{background:var(--surf2)}
 .bv{display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;background:#d4edda;color:#0a6640;font-family:var(--head);font-weight:700}
 .be{display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;background:#fff3cd;color:#7a4000;font-family:var(--head);font-weight:700}
 
+/* STATE BREAKDOWN */
+.sb-divider{display:flex;align-items:center;gap:10px;margin:20px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--bd)}
+.sb-divider:first-child{margin-top:0}
+.sb-divider-label{font-family:var(--head);font-size:11px;font-weight:700;width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sb-divider-title{font-family:var(--head);font-size:13px;font-weight:600;color:var(--t1);letter-spacing:.02em}
+.sb-divider-note{font-size:11px;color:var(--t3);flex:1;text-align:right}
+.sb-card{margin-bottom:10px}
+.cov-g{font-size:10px;font-family:var(--head);font-weight:700;padding:2px 6px;border-radius:3px;background:#d4edda;color:#0a6640;display:inline-block}
+.cov-y{font-size:10px;font-family:var(--head);font-weight:700;padding:2px 6px;border-radius:3px;background:#fff3cd;color:#7a4000;display:inline-block}
+.cov-r{font-size:10px;font-family:var(--head);font-weight:700;padding:2px 6px;border-radius:3px;background:#ffe8e0;color:#c01000;display:inline-block}
+
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -213,9 +224,10 @@ tr:hover td{background:var(--surf2)}
 <!-- MAIN -->
 <main class="main">
   <div class="vtabs">
+    <div class="vt" onclick="setView('branches',this)">Branch overview</div>
+    <div class="vt" onclick="setView('statebreak',this)">State breakdown</div>
     <div class="vt act" onclick="setView('towns',this)">Town presence</div>
     <div class="vt" onclick="setView('coverage',this)">State matrix</div>
-    <div class="vt" onclick="setView('branches',this)">Branch count chart</div>
     <div class="vt" onclick="setView('help',this)">Sources &amp; how to use</div>
   </div>
   <div class="ct" id="CT"></div>
@@ -229,48 +241,48 @@ tr:hover td{background:var(--surf2)}
    ═══════════════════════════════════════════════ */
 const L=[
   // HFC — South-focused
-  {id:'aptus',     n:'Aptus Value HF',       cat:'hfc_s',c:'#1a3a8f',br:300, src:'V',srcNote:'CARE ratings May 2025, Mar-25',aum:'₹10,865cr',st:['TN','AP','TS','KA','OD','MH','PY']},
-  {id:'repco',     n:'Repco Home Finance',   cat:'hfc_s',c:'#0e5c3a',br:189, src:'V',srcNote:'FY25 results Mar-25: 189 branches + 44 satellite = 233 total',aum:'₹14,602cr',st:['TN','AP','TS','KA','KE','MH','RJ','WB','JH','OD','GJ','MP','PY']},
-  {id:'homefirst', n:'Home First FC',        cat:'hfc_s',c:'#1a7a50',br:155, src:'V',srcNote:'Q4FY25 investor pres, Mar-25',aum:'₹12,295cr',st:['TN','AP','TS','KA','GJ','MH','UP','MP','RJ','HR']},
-  {id:'truhome',   n:'Truhome Finance',      cat:'hfc_s',c:'#2aaa70',br:170, src:'V',srcNote:'Company website (170+), 16 states',aum:'₹15,236cr',st:['TN','AP','TS','KA','GJ','MH','RJ','MP','HR','UK','PB','KE','CG','WB']},
-  {id:'sundaram',  n:'Sundaram Home Finance', cat:'hfc_s',c:'#4ac080',br:115, src:'V',srcNote:'Company website sundaramhome.in',aum:'₹16,262cr',st:['TN','AP','TS','KA','KE','MH','PY','RJ','CG']},
-  {id:'sundarameb',n:'Sundaram EB division', cat:'hfc_s',c:'#85B7EB',br:72,  src:'V',srcNote:'Company website sundaramhome.in: 72 EB branches TN/TS/AP/KA',aum:'sub-div',  st:['TN','KA','AP','KE','TS']},
-  {id:'canfin',    n:'CanFin Homes',         cat:'hfc_s',c:'#2050b0',br:234, src:'V',srcNote:'FY25 results, opened 15 in FY25',aum:'₹35,000cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','PY','AS']},
+  {id:'aptus',     n:'Aptus Value HF',       cat:'hfc_s',c:'#1a3a8f',br:300, src:'V',srcNote:'CARE ratings May 2025, Mar-25',srcDate:'Mar-25',aum:'₹10,865cr',st:['TN','AP','TS','KA','OD','MH','PY']},
+  {id:'repco',     n:'Repco Home Finance',   cat:'hfc_s',c:'#0e5c3a',br:189, src:'V',srcNote:'FY25 results Mar-25: 189 branches + 44 satellite = 233 total',srcDate:'Mar-25',aum:'₹14,602cr',st:['TN','AP','TS','KA','KE','MH','RJ','WB','JH','OD','GJ','MP','PY']},
+  {id:'homefirst', n:'Home First FC',        cat:'hfc_s',c:'#1a7a50',br:155, src:'V',srcNote:'Q4FY25 investor pres, Mar-25',srcDate:'Mar-25',aum:'₹12,295cr',st:['TN','AP','TS','KA','GJ','MH','UP','MP','RJ','HR']},
+  {id:'truhome',   n:'Truhome Finance',      cat:'hfc_s',c:'#2aaa70',br:170, src:'V',srcNote:'Company website (170+), 16 states',srcDate:'Mar-25',aum:'₹15,236cr',st:['TN','AP','TS','KA','GJ','MH','RJ','MP','HR','UK','PB','KE','CG','WB']},
+  {id:'sundaram',  n:'Sundaram Home Finance', cat:'hfc_s',c:'#4ac080',br:115, src:'V',srcNote:'Company website sundaramhome.in',srcDate:'Mar-25',aum:'₹16,262cr',st:['TN','AP','TS','KA','KE','MH','PY','RJ','CG']},
+  {id:'sundarameb',n:'Sundaram EB division', cat:'hfc_s',c:'#85B7EB',br:72,  src:'V',srcNote:'Company website sundaramhome.in: 72 EB branches TN/TS/AP/KA',srcDate:'Mar-25',aum:'sub-div',  st:['TN','KA','AP','KE','TS']},
+  {id:'canfin',    n:'CanFin Homes',         cat:'hfc_s',c:'#2050b0',br:234, src:'V',srcNote:'FY25 results, opened 15 in FY25',srcDate:'Mar-25',aum:'₹35,000cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','PY','AS']},
   // HFC — North/West
-  {id:'aavas',     n:'Aavas Financiers',     cat:'hfc_n',c:'#7F77DD',br:397, src:'V',srcNote:'FY25 results, Mar-25; 14 states',aum:'₹20,420cr',st:['RJ','GJ','MH','MP','DL','UP','CG','HR','UK','HP','OD','KA','PB','TN']},
-  {id:'indiashelter',n:'India Shelter FC',  cat:'hfc_n',c:'#a090f0',br:266, src:'V',srcNote:'CARE/Q4FY25 results, Mar-25',aum:'₹8,189cr', st:['RJ','MH','MP','KA','GJ','UP','HR','CG','UK','PB','JH','WB','BR','AS','TS','TN']},
+  {id:'aavas',     n:'Aavas Financiers',     cat:'hfc_n',c:'#7F77DD',br:397, src:'V',srcNote:'FY25 results, Mar-25; 14 states',srcDate:'Mar-25',aum:'₹20,420cr',st:['RJ','GJ','MH','MP','DL','UP','CG','HR','UK','HP','OD','KA','PB','TN']},
+  {id:'indiashelter',n:'India Shelter FC',  cat:'hfc_n',c:'#a090f0',br:266, src:'V',srcNote:'CARE/Q4FY25 results, Mar-25',srcDate:'Mar-25',aum:'₹8,189cr', st:['RJ','MH','MP','KA','GJ','UP','HR','CG','UK','PB','JH','WB','BR','AS','TS','TN']},
   // HFC — Pan-India
-  {id:'aadhar',    n:'Aadhar Housing Fin',   cat:'hfc_p',c:'#c03060',br:575, src:'V',srcNote:'ICICI Sec May-25; 57 added FY25',aum:'₹25,500cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','MN']},
-  {id:'pnbhf',     n:'PNB Housing Fin',      cat:'hfc_p',c:'#e03020',br:356, src:'V',srcNote:'Q4FY25 results Apr-25: 356 branches/outreach; 200 Roshni affordable',aum:'₹74,724cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','KE']},
-  {id:'abhfl',     n:'Aditya Birla HF',      cat:'hfc_p',c:'#e05030',br:168, src:'V',srcNote:'Company website Dec-25: 168 branches; AUM ₹42,204cr Dec-25',aum:'₹42,204cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','BR','AS','KE']},
-  {id:'ltf',       n:'L&T Finance',          cat:'nbfc_div',c:'#d07040',br:850, src:'E',srcNote:'850+ = total company all products (HL+LAP has no standalone branch count); retail AUM ₹95,180cr FY25',aum:'₹97,762cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','BR','AS','KE']},
-  {id:'iifl',      n:'IIFL Home Finance',    cat:'hfc_p',c:'#c08030',br:315, src:'V',srcNote:'Company website: 315 branches, 18 states (current)',aum:'₹27,000cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS']},
-  {id:'bajajhf',   n:'Bajaj Housing Finance', cat:'hfc_p',c:'#a02020',br:216, src:'V',srcNote:'Q4FY25 results Apr-25; 174 locations, 21 states',aum:'₹1,14,684cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','KE']},
-  {id:'gichf',     n:'GIC Housing Finance',   cat:'hfc_p',c:'#606060',br:72,  src:'V',srcNote:'IIFL Capital Mar-25: 72 branch offices + 5 satellite + 4 hub',aum:'₹10,774cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','BR','GA','JK']},
-  {id:'sammaan',   n:'Sammaan Capital (IBHFL)',cat:'hfc_p',c:'#505070',br:220, src:'V',srcNote:'Company website Jun-25 (220+ branches); formerly Indiabulls HF',aum:'₹70,000cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','KE']},
+  {id:'aadhar',    n:'Aadhar Housing Fin',   cat:'hfc_p',c:'#c03060',br:575, src:'V',srcNote:'ICICI Sec May-25; 57 added FY25',srcDate:'Mar-25',aum:'₹25,500cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','MN']},
+  {id:'pnbhf',     n:'PNB Housing Fin',      cat:'hfc_p',c:'#e03020',br:356, src:'V',srcNote:'Q4FY25 results Apr-25: 356 branches/outreach; 200 Roshni affordable',srcDate:'Mar-25',aum:'₹74,724cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','KE']},
+  {id:'abhfl',     n:'Aditya Birla HF',      cat:'hfc_p',c:'#e05030',br:168, src:'V',srcNote:'Company website Dec-25: 168 branches; AUM ₹42,204cr Dec-25',srcDate:'Dec-25',aum:'₹42,204cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','BR','AS','KE']},
+  {id:'ltf',       n:'L&T Finance',          cat:'nbfc_div',c:'#d07040',br:850, src:'E',srcNote:'850+ = total company all products (HL+LAP has no standalone branch count); retail AUM ₹95,180cr FY25',srcDate:'Mar-25',aum:'₹97,762cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','BR','AS','KE']},
+  {id:'iifl',      n:'IIFL Home Finance',    cat:'hfc_p',c:'#c08030',br:315, src:'V',srcNote:'Company website: 315 branches, 18 states (current)',srcDate:'Mar-25',aum:'₹27,000cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS']},
+  {id:'bajajhf',   n:'Bajaj Housing Finance', cat:'hfc_p',c:'#a02020',br:216, src:'V',srcNote:'Q4FY25 results Apr-25; 174 locations, 21 states',srcDate:'Mar-25',aum:'₹1,14,684cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','KE']},
+  {id:'gichf',     n:'GIC Housing Finance',   cat:'hfc_p',c:'#606060',br:72,  src:'V',srcNote:'IIFL Capital Mar-25: 72 branch offices + 5 satellite + 4 hub',srcDate:'Mar-25',aum:'₹10,774cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','BR','GA','JK']},
+  {id:'sammaan',   n:'Sammaan Capital (IBHFL)',cat:'hfc_p',c:'#505070',br:220, src:'V',srcNote:'Company website Jun-25 (220+ branches); formerly Indiabulls HF',srcDate:'Jun-25',aum:'₹70,000cr',st:['TN','AP','TS','KA','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','KE']},
   // NBFC — property/business
-  {id:'fivestar',  n:'Five Star BF',         cat:'nbfc',  c:'#0a7040',br:748, src:'V',srcNote:'CARE Jun-25: AP=234,TN=206,TS=115,MP=94,KA=59,MH=25,UP=6,RJ=5,CG=3,GJ=1',aum:'₹11,877cr',st:['TN','AP','TS','KA','MP','MH','CG','UP','RJ','GJ']},
-  {id:'sbfc',      n:'SBFC Finance',         cat:'nbfc',  c:'#2a9060',br:205, src:'V',srcNote:'Broker report Jun-25: 205 branches Mar-25; 220 by Jan-26 (CARE)',aum:'₹9,351cr', st:['DL','HR','RJ','UP','MH','GJ','KA','TN','MP','PB','UK','BR','WB','TS','AS','JH']},
+  {id:'fivestar',  n:'Five Star BF',         cat:'nbfc',  c:'#0a7040',br:748, src:'V',srcNote:'CARE Jun-25: AP=234,TN=206,TS=115,MP=94,KA=59,MH=25,UP=6,RJ=5,CG=3,GJ=1',srcDate:'Jun-25',aum:'₹11,877cr',stBr:{AP:234,TN:206,TS:115,MP:94,KA:59,MH:25,UP:6,RJ:5,CG:3,GJ:1},st:['TN','AP','TS','KA','MP','MH','CG','UP','RJ','GJ']},
+  {id:'sbfc',      n:'SBFC Finance',         cat:'nbfc',  c:'#2a9060',br:205, src:'V',srcNote:'Broker report Jun-25: 205 branches Mar-25; 220 by Jan-26 (CARE)',srcDate:'Mar-25',aum:'₹9,351cr', st:['DL','HR','RJ','UP','MH','GJ','KA','TN','MP','PB','UK','BR','WB','TS','AS','JH']},
   // Cholamandalam — segment splits (FY25 investor presentation Mar-25)
   // VF=1564 total; LAP=780 (771 co-located with VF); HL=710 (677 co-located with VF); Total=1613
-  {id:'chola_total',n:'Chola — Total',       cat:'chola', c:'#2244a0',br:1613,src:'V',srcNote:'FY25 investor pres Mar-25: 1,613 total branches (VF+LAP+HL+SME)',aum:'₹1,84,746cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','CG','UP','MP','DL','HR','WB','OD','PB','UK','BR','AS']},
-  {id:'chola_vf',  n:'Chola — Vehicle Fin',  cat:'chola', c:'#3366cc',br:1564,src:'V',srcNote:'FY25 investor pres Mar-25: 1,564 VF branches pan India',aum:'₹1,01,630cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','CG','UP','MP','DL','HR','WB','OD','PB','UK','BR','AS']},
-  {id:'chola_lap', n:'Chola — LAP',          cat:'chola', c:'#5588ee',br:780, src:'V',srcNote:'FY25 investor pres Mar-25: 780 LAP branches (771 co-located with VF); SME ₹24,474cr',aum:'₹33,776cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','CG','UP','MP','DL','HR','WB','OD','PB','UK','BR','AS']},
-  {id:'chola_hl',  n:'Chola — Home Loans',   cat:'chola', c:'#88aaff',br:710, src:'V',srcNote:'FY25 investor pres Mar-25: 710 HL branches (677 co-located with VF); affordable segment',aum:'₹17,416cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','CG','UP','MP','DL','HR','WB','OD','PB','UK','BR','AS']},
+  {id:'chola_total',n:'Chola — Total',       cat:'chola', c:'#2244a0',br:1613,src:'V',srcNote:'FY25 investor pres Mar-25: 1,613 total branches (VF+LAP+HL+SME)',srcDate:'Mar-25',aum:'₹1,84,746cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','CG','UP','MP','DL','HR','WB','OD','PB','UK','BR','AS']},
+  {id:'chola_vf',  n:'Chola — Vehicle Fin',  cat:'chola', c:'#3366cc',br:1564,src:'V',srcNote:'FY25 investor pres Mar-25: 1,564 VF branches pan India',srcDate:'Mar-25',aum:'₹1,01,630cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','CG','UP','MP','DL','HR','WB','OD','PB','UK','BR','AS']},
+  {id:'chola_lap', n:'Chola — LAP',          cat:'chola', c:'#5588ee',br:780, src:'V',srcNote:'FY25 investor pres Mar-25: 780 LAP branches (771 co-located with VF); SME ₹24,474cr',srcDate:'Mar-25',aum:'₹33,776cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','CG','UP','MP','DL','HR','WB','OD','PB','UK','BR','AS']},
+  {id:'chola_hl',  n:'Chola — Home Loans',   cat:'chola', c:'#88aaff',br:710, src:'V',srcNote:'FY25 investor pres Mar-25: 710 HL branches (677 co-located with VF); affordable segment',srcDate:'Mar-25',aum:'₹17,416cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','CG','UP','MP','DL','HR','WB','OD','PB','UK','BR','AS']},
   // Gold NBFC — parent gold loan network + separate housing subsidiaries
-  {id:'muthoot_gold',n:'Muthoot Finance (Gold)',cat:'gold', c:'#8a6010',br:7391,src:'V',srcNote:'Muthoot Finance Ltd FY25 results May-25: 7,391 gold loan branches',aum:'₹1,02,956cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','PY','GA','JK','HP','CH','MN','TR']},
-  {id:'muthoot_hf', n:'Muthoot Housing Fin',  cat:'gold',  c:'#c09a40',br:160, src:'V',srcNote:'Annual report FY25: 160 branches, 11 states; AUM ₹2,557cr (+24% YoY). Subsidiary of Muthoot Fincorp — DIFFERENT entity from Muthoot Finance Ltd',aum:'₹2,557cr',st:['KA','TN','AP','TS','MH','KE','GJ','RJ','UP','DL','OD']},
-  {id:'manappuram_gold',n:'Manappuram Finance (Gold)',cat:'gold',c:'#c09020',br:5286,src:'V',srcNote:'CARE Feb-25; consolidated Mar-24 (gold+microfinance+vehicle). Parent standalone gold AUM ~57%',aum:'₹42,070cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','PY','GA','AN','MN','TR']},
-  {id:'manappuram_hf',n:'Manappuram Home Fin', cat:'gold',  c:'#e0b840',br:89,  src:'V',srcNote:'CARE Feb-25: 89 branches Dec-24, 12 states; AUM ₹1,531cr; top state KA (22%). Wholly-owned subsidiary of Manappuram Finance',aum:'₹1,531cr',st:['KA','MH','TN','AP','TS','KE','GJ','RJ','UP','DL','MP','HR']},
+  {id:'muthoot_gold',n:'Muthoot Finance (Gold)',cat:'gold', c:'#8a6010',br:7391,src:'V',srcNote:'Muthoot Finance Ltd FY25 results May-25: 7,391 gold loan branches',srcDate:'Mar-25',aum:'₹1,02,956cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','PY','GA','JK','HP','CH','MN','TR']},
+  {id:'muthoot_hf', n:'Muthoot Housing Fin',  cat:'gold',  c:'#c09a40',br:160, src:'V',srcNote:'Annual report FY25: 160 branches, 11 states; AUM ₹2,557cr (+24% YoY). Subsidiary of Muthoot Fincorp — DIFFERENT entity from Muthoot Finance Ltd',srcDate:'Mar-25',aum:'₹2,557cr',st:['KA','TN','AP','TS','MH','KE','GJ','RJ','UP','DL','OD']},
+  {id:'manappuram_gold',n:'Manappuram Finance (Gold)',cat:'gold',c:'#c09020',br:5286,src:'V',srcNote:'CARE Feb-25; consolidated Mar-24 (gold+microfinance+vehicle). Parent standalone gold AUM ~57%',srcDate:'Mar-24',aum:'₹42,070cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','PY','GA','AN','MN','TR']},
+  {id:'manappuram_hf',n:'Manappuram Home Fin', cat:'gold',  c:'#e0b840',br:89,  src:'V',srcNote:'CARE Feb-25: 89 branches Dec-24, 12 states; AUM ₹1,531cr; top state KA (22%). Wholly-owned subsidiary of Manappuram Finance',srcDate:'Dec-24',aum:'₹1,531cr',st:['KA','MH','TN','AP','TS','KE','GJ','RJ','UP','DL','MP','HR']},
   // Vehicle financiers — total network, no segment split available
-  {id:'shriram',   n:'Shriram Finance (Total)',cat:'veh',  c:'#8030b0',br:3225,src:'V',srcNote:'Total company Dec-25: CV+2W+gold+SME+personal. No HL segment — housing arm demerged as Truhome Finance Dec-24',aum:'₹2,91,709cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS']},
-  {id:'hdb',       n:'HDB Financial (Total)', cat:'veh',   c:'#6020a0',br:1771,src:'V',srcNote:'Total company FY25 IPO note: enterprise+asset+consumer finance. No segment branch split published',aum:'₹1,07,262cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS']},
-  {id:'sundaramfin',n:'Sundaram Finance (Total)',cat:'veh', c:'#a040d0',br:600, src:'V',srcNote:'Total company sundaramfinance.in: vehicle finance. Housing via subsidiary Sundaram Home Finance (separate entry)',aum:'₹43,987cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','OD','WB','PB','CG']},
+  {id:'shriram',   n:'Shriram Finance (Total)',cat:'veh',  c:'#8030b0',br:3225,src:'V',srcNote:'Total company Dec-25: CV+2W+gold+SME+personal. No HL segment — housing arm demerged as Truhome Finance Dec-24',srcDate:'Dec-25',aum:'₹2,91,709cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS']},
+  {id:'hdb',       n:'HDB Financial (Total)', cat:'veh',   c:'#6020a0',br:1771,src:'V',srcNote:'Total company FY25 IPO note: enterprise+asset+consumer finance. No segment branch split published',srcDate:'Mar-25',aum:'₹1,07,262cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS']},
+  {id:'sundaramfin',n:'Sundaram Finance (Total)',cat:'veh', c:'#a040d0',br:600, src:'V',srcNote:'Total company sundaramfinance.in: vehicle finance. Housing via subsidiary Sundaram Home Finance (separate entry)',srcDate:'Mar-25',aum:'₹43,987cr',st:['TN','AP','TS','KA','KE','MH','GJ','RJ','UP','MP','DL','HR','OD','WB','PB','CG']},
   // PE-backed NBFC — MSME / LAP / housing
-  {id:'vistaar',   n:'Vistaar Finance',       cat:'msme',  c:'#0a7a8a',br:265, src:'V',srcNote:'CARE Jul-25; AUM ₹4,930cr Mar-25; Warburg Pincus',aum:'₹4,930cr', st:['KA','TN','AP','TS','MH','GJ','MP','RJ','HR','UP','OD','CG']},
+  {id:'vistaar',   n:'Vistaar Finance',       cat:'msme',  c:'#0a7a8a',br:265, src:'V',srcNote:'CARE Jul-25; AUM ₹4,930cr Mar-25; Warburg Pincus',srcDate:'Mar-25',aum:'₹4,930cr', st:['KA','TN','AP','TS','MH','GJ','MP','RJ','HR','UP','OD','CG']},
   // Small Finance Banks — full bank network (all products)
-  {id:'esafsfb',   n:'ESAF SFB (Total)',      cat:'sfb',   c:'#c04040',br:787, src:'V',srcNote:'FY25 Mar-25: 787 total bank branches; full bank incl. MFI+housing+gold+MSME+savings. No segment split',aum:'₹19,839cr',st:['KE','TN','MH','WB','MP','CG','UP','HR','RJ','GJ','AP','TS','KA','OD','AS','BR','JH','PB','UK','DL','HP','GA','MN','TR']},
-  {id:'ujjivansfb', n:'Ujjivan SFB (Total)',  cat:'sfb',   c:'#e06040',br:777, src:'V',srcNote:'Wikipedia Dec-25: 777 total bank branches; full bank incl. MFI+housing+gold+MSME. Housing book ₹5,800cr+. No segment split',aum:'₹30,344cr',st:['KA','TN','AP','TS','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','HP','MN','TR','AN']},
+  {id:'esafsfb',   n:'ESAF SFB (Total)',      cat:'sfb',   c:'#c04040',br:787, src:'V',srcNote:'FY25 Mar-25: 787 total bank branches; full bank incl. MFI+housing+gold+MSME+savings. No segment split',srcDate:'Mar-25',aum:'₹19,839cr',st:['KE','TN','MH','WB','MP','CG','UP','HR','RJ','GJ','AP','TS','KA','OD','AS','BR','JH','PB','UK','DL','HP','GA','MN','TR']},
+  {id:'ujjivansfb', n:'Ujjivan SFB (Total)',  cat:'sfb',   c:'#e06040',br:777, src:'V',srcNote:'Wikipedia Dec-25: 777 total bank branches; full bank incl. MFI+housing+gold+MSME. Housing book ₹5,800cr+. No segment split',srcDate:'Dec-25',aum:'₹30,344cr',st:['KA','TN','AP','TS','KE','MH','GJ','RJ','UP','MP','DL','HR','CG','OD','WB','PB','UK','JH','BR','AS','HP','MN','TR','AN']},
 ];
 
 const CATS={
@@ -495,6 +507,22 @@ const TODOS=[
   {id:12,done:true,  p:'l', txt:'Verify Repco: 189 branches + 44 satellite = 233 total (FY25 results, Mar-25) ✓'},
 ];
 
+/* ── COMPUTED: town counts from TD{} ───────────── */
+function computeTownCounts(){
+  const out={};
+  L.forEach(l=>{out[l.id]={};});
+  Object.entries(TD).forEach(([stCode,towns])=>{
+    towns.forEach(row=>{
+      row.l.forEach(lid=>{
+        if(!out[lid])out[lid]={};
+        out[lid][stCode]=(out[lid][stCode]||0)+1;
+      });
+    });
+  });
+  return out;
+}
+const TC=computeTownCounts();
+
 /* ── STATE ──────────────────────────────────────── */
 let base=null, comps=new Set(), st='AP', tdOpen=false, dbt=null, view='towns';
 const lb=id=>L.find(l=>l.id===id);
@@ -534,10 +562,98 @@ function setView(v,el){
 }
 const fmt=t=>'<p>'+t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n\n/g,'</p><p>')+'</p>';
 
+/* ── STATE BREAKDOWN VIEW ──────────────────────── */
+function buildStateBreak(lenders){
+  const toShow=lenders.length?lenders:L;
+  let h='';
+
+  // ── SECTION A: Our town mapping ──
+  h+='<div class="sb-divider"><span class="sb-divider-label">A</span><span class="sb-divider-title">Our town mapping</span><span class="sb-divider-note">Computed from town-level presence data we have compiled</span></div>';
+  toShow.forEach(l=>{
+    const tc=TC[l.id]||{};
+    const states=Object.entries(tc).sort((a,b)=>b[1]-a[1]);
+    const totalTowns=states.reduce((s,e)=>s+e[1],0);
+    if(totalTowns===0){
+      h+='<div class="tw sb-card"><div class="th"><span class="tt" style="color:'+l.c+'">'+l.n+'</span><span style="font-size:10px;color:var(--t3)">No town-level data mapped</span></div></div>';
+      return;
+    }
+    h+='<div class="tw sb-card"><div class="th"><span class="tt" style="color:'+l.c+'">'+l.n+'</span><span style="font-size:10px;color:var(--t3)">'+totalTowns+' towns mapped across '+states.length+' states</span></div><div class="ts"><table><thead><tr><th>State</th><th style="text-align:right">Towns mapped</th><th>Towns</th></tr></thead><tbody>';
+    states.forEach(([stCode,count])=>{
+      const townNames=(TD[stCode]||[]).filter(r=>r.l.includes(l.id)).map(r=>r.t);
+      const abbrev=townNames.length>5?townNames.slice(0,5).join(', ')+' +'+String(townNames.length-5)+' more':townNames.join(', ');
+      h+='<tr><td style="font-weight:500">'+(SM[stCode]||stCode)+'</td><td style="text-align:right"><span class="hn '+hc(count)+'">'+count+'</span></td><td style="font-size:11px;color:var(--t2)">'+abbrev+'</td></tr>';
+    });
+    h+='</tbody></table></div></div>';
+  });
+
+  // ── SECTION B: Company-reported ──
+  h+='<div class="sb-divider"><span class="sb-divider-label">B</span><span class="sb-divider-title">Company-reported branch counts</span><span class="sb-divider-note">From company filings, CARE ratings, investor presentations</span></div>';
+  toShow.forEach(l=>{
+    const srcBadge=l.src==='V'?'bv':'be';
+    h+='<div class="tw sb-card"><div class="th"><span class="tt" style="color:'+l.c+'">'+l.n+'</span><span style="font-size:10px;color:var(--t3)">'+l.br.toLocaleString()+' total branches &middot; <span class="'+srcBadge+'">'+l.src+'</span> &middot; as of '+(l.srcDate||'&mdash;')+'</span></div>';
+    if(l.stBr){
+      const states=Object.entries(l.stBr).sort((a,b)=>b[1]-a[1]);
+      h+='<div class="ts"><table><thead><tr><th>State</th><th style="text-align:right">Reported branches</th><th style="text-align:right">% of total</th></tr></thead><tbody>';
+      states.forEach(([stCode,count])=>{
+        const pct=((count/l.br)*100).toFixed(1);
+        h+='<tr><td style="font-weight:500">'+(SM[stCode]||stCode)+'</td><td style="text-align:right;font-family:var(--mono)">'+count.toLocaleString()+'</td><td style="text-align:right;color:var(--t3)">'+pct+'%</td></tr>';
+      });
+      const stTotal=states.reduce((s,e)=>s+e[1],0);
+      if(stTotal<l.br){
+        h+='<tr style="background:var(--surf2)"><td style="font-weight:500;color:var(--t3)">Other / unallocated</td><td style="text-align:right;font-family:var(--mono);color:var(--t3)">'+(l.br-stTotal).toLocaleString()+'</td><td style="text-align:right;color:var(--t3)">'+(((l.br-stTotal)/l.br)*100).toFixed(1)+'%</td></tr>';
+      }
+      h+='</tbody></table></div>';
+    } else {
+      h+='<div style="padding:14px 16px;font-size:12px;color:var(--t3);line-height:1.7">State-level branch breakdown not published. Total: <strong style="color:var(--t1)">'+l.br.toLocaleString()+'</strong> branches across <strong style="color:var(--t1)">'+l.st.length+'</strong> states ('+l.st.join(', ')+')<br><span style="font-size:11px">Source: '+l.srcNote+'</span></div>';
+    }
+    h+='</div>';
+  });
+
+  // ── SECTION C: Data reconciliation ──
+  const hasRecon=toShow.filter(l=>{const tc2=TC[l.id]||{};return Object.keys(tc2).length>0;});
+  if(hasRecon.length){
+    h+='<div class="sb-divider"><span class="sb-divider-label">C</span><span class="sb-divider-title">Data reconciliation</span><span class="sb-divider-note">Our town mapping vs company-reported &mdash; shows how much of their network our data covers</span></div>';
+    hasRecon.forEach(l=>{
+      const tc2=TC[l.id]||{};
+      const states=Object.keys(tc2).sort((a,b)=>(tc2[b]||0)-(tc2[a]||0));
+      if(!states.length)return;
+      const hasStBr=!!l.stBr;
+      h+='<div class="tw sb-card"><div class="th"><span class="tt" style="color:'+l.c+'">'+l.n+'</span><span style="font-size:10px;color:var(--t3)">Reported: '+l.br.toLocaleString()+' branches ('+(l.srcDate||'&mdash;')+') &middot; '+(hasStBr?'State-level data available':'Total only')+'</span></div><div class="ts"><table><thead><tr><th>State</th><th style="text-align:right">Towns mapped</th><th style="text-align:right">Branches reported</th><th style="text-align:right">Coverage</th></tr></thead><tbody>';
+      states.forEach(stCode=>{
+        const mapped=tc2[stCode]||0;
+        const reported=hasStBr?(l.stBr[stCode]||null):null;
+        let covHtml='&mdash;';
+        if(reported){
+          const pct=((mapped/reported)*100).toFixed(0);
+          const cls=pct>=50?'cov-g':pct>=20?'cov-y':'cov-r';
+          covHtml='<span class="'+cls+'">'+pct+'%</span>';
+        }
+        h+='<tr><td style="font-weight:500">'+(SM[stCode]||stCode)+'</td><td style="text-align:right"><span class="hn '+hc(mapped)+'">'+mapped+'</span></td><td style="text-align:right;font-family:var(--mono)">'+(reported!==null?reported.toLocaleString():'<span style="color:var(--t3)">&mdash;</span>')+'</td><td style="text-align:right">'+covHtml+'</td></tr>';
+      });
+      // states where reported but not mapped
+      if(hasStBr){
+        Object.keys(l.stBr).filter(s=>!tc2[s]).forEach(stCode=>{
+          h+='<tr><td style="font-weight:500;color:var(--t3)">'+(SM[stCode]||stCode)+'</td><td style="text-align:right"><span class="hn h0">0</span></td><td style="text-align:right;font-family:var(--mono)">'+l.stBr[stCode].toLocaleString()+'</td><td style="text-align:right"><span class="cov-r">0%</span></td></tr>';
+        });
+      }
+      h+='</tbody></table></div></div>';
+    });
+    h+='<div style="padding:12px 16px;font-size:11px;color:var(--t3);line-height:1.8;background:var(--surface);border:1px solid var(--bd);border-radius:6px;margin-bottom:14px"><strong style="color:var(--t2)">How to read coverage:</strong> &ldquo;Towns mapped&rdquo; = towns in our compiled dataset where this lender has at least one branch. &ldquo;Branches reported&rdquo; = company-disclosed branch count for that state. A coverage of 10% means our town data captures roughly 1 in 10 of their actual branch locations &mdash; the gap reflects sub-district/mandal-level branches we have not mapped, not absence.<br><span class="cov-g" style="font-size:10px">&ge;50%</span> good coverage &nbsp;<span class="cov-y" style="font-size:10px">20&ndash;49%</span> partial &nbsp;<span class="cov-r" style="font-size:10px">&lt;20%</span> significant gap</div>';
+  }
+
+  return h;
+}
+
 /* ── MAIN RENDER ──────────────────────────────── */
 function draw(){
   const ct=document.getElementById('CT');
   if(view==='help'){ct.innerHTML=buildHelp();return;}
+  if(view==='statebreak'){
+    const bO=base?lb(base):null;
+    const cOs=L.filter(l=>comps.has(l.id));
+    const all=[...(bO?[bO]:[]),...cOs];
+    ct.innerHTML=buildStateBreak(all);return;
+  }
   const bO=base?lb(base):null;
   const cOs=L.filter(l=>comps.has(l.id));
   const all=[...(bO?[bO]:[]),...cOs];
